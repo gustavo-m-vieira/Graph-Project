@@ -15,7 +15,7 @@
     "ecmaVersion": 2018
   },
   "rules": {
-    "max-len": ["warn", { "code": 140 }],
+    "max-len": ["warn", { "code": 160 }],
     "no-await-in-loop": "warn",
     "no-console":"off",
     "no-param-reassign":"off",
