@@ -72,4 +72,22 @@ export class Graph {
     if (!sourceNode) throw new Error('Missing sourceNode');
     return this.bfs(sourceNode, this.GraphStructure);
   }
+
+  runDFS(sourceNode) {
+    if (!sourceNode) throw new Error('Missing sourceNode');
+    return this.dfs(sourceNode, this.GraphStructure);
+  }
+
+  findMinimumPath(sourceNode, targetNode) {
+    if (!sourceNode || !targetNode) throw new Error('Missing sourceNode e/or targetNode');
+    const {
+      minimumPath,
+      minimumPathSize,
+    } = this.bfs(sourceNode, this.GraphStructure, targetNode);
+
+    return {
+      minimumPath,
+      minimumPathSize,
+    };
+  }
 }
