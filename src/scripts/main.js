@@ -2,6 +2,7 @@ import minimist from 'minimist';
 import fs from 'fs';
 import { catchEdges } from '../functions';
 import { createGraphAsAnAdjacentArray } from '../functions/array';
+import { createGraphAsAMatrix } from '../functions/matrix';
 
 const { path } = minimist(process.argv.slice(2));
 
@@ -22,10 +23,11 @@ async function main() {
   const edges = catchEdges(Buffer);
   console.log({ edges });
 
-  const graph = createGraphAsAnAdjacentArray(edges);
-  console.log({ graph });
+  const graphAsArray = createGraphAsAnAdjacentArray(edges);
+  console.log({ graphAsArray });
 
-  return graph;
+  const graphAsMatrix = createGraphAsAMatrix(edges);
+  console.log({ graphAsMatrix });
 }
 
 main();

@@ -1,8 +1,8 @@
 import { getLastNode } from '../getLastNode';
 /**
-* @name catchEdges
-* @description Receives a Buffer and returns an array with edges.
-* @param {Buffer} Buffer - a Buffer
+* @name createGraphAsAnAdjacentArray
+* @description Receives an array of edges an returns a graph.
+* @param {Number[]} edges - an array of Edges
 */
 export function createGraphAsAnAdjacentArray(edges) {
   const lastNode = getLastNode(edges);
