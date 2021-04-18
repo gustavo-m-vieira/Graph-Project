@@ -67,4 +67,9 @@ export class Graph {
 
     fs.writeFileSync(path, fileAsString);
   }
+
+  runBFS(sourceNode) {
+    if (!sourceNode) throw new Error('Missing sourceNode');
+    return this.bfs(sourceNode, this.GraphStructure);
+  }
 }

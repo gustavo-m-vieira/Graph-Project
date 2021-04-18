@@ -6,8 +6,8 @@
 */
 export function dfs(s, graph) {
   const visited = new Set();
-  const fathers = new Array(graph.length + 1);
-  const levels = new Array(graph.length + 1);
+  const fathers = new Array(graph.length);
+  const levels = new Array(graph.length);
   levels[s] = 0;
 
   const dfsAux = (v) => {

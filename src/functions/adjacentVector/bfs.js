@@ -26,12 +26,11 @@ function calculateMinimumPath(targetNode, sourceNode, fathers) {
 * @param {Set[]} graph - Graph
 */
 export function bfs(s, graph, targetNode) {
-  const size = graph.length;
-  const visited = new Array(size + 1);
+  const visited = new Array(graph.length);
 
   let queue = [s];
-  const fathers = new Array(graph.length + 1);
-  const levels = new Array(graph.length + 1);
+  const fathers = new Array(graph.length);
+  const levels = new Array(graph.length);
   levels[s] = 0;
   visited[s] = true;
   let foundNode;
@@ -47,7 +46,10 @@ export function bfs(s, graph, targetNode) {
         visited[node] = true;
         fathers[node] = s;
         levels[node] = levels[s] + 1;
-        if (targetNode && node === targetNode) break;
+        if (targetNode && node === targetNode) {
+          foundNode = true;
+          break;
+        }
       }
     }
 
