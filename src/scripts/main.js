@@ -1,6 +1,6 @@
 import minimist from 'minimist';
 import fs from 'fs';
-import { catchEdges } from '../functions';
+import { catchEdges, getGraus } from '../functions';
 import { createGraphAsAnAdjacentArray } from '../functions/array';
 import { createGraphAsAMatrix } from '../functions/matrix';
 
@@ -22,6 +22,13 @@ async function main() {
 
   const edges = catchEdges(Buffer);
   console.log({ edges });
+
+  const {
+    menorGrau, maiorGrau, mediaGrau, medianaGrau,
+  } = getGraus(edges);
+  console.log({
+    menorGrau, maiorGrau, mediaGrau, medianaGrau,
+  });
 
   const graphAsArray = createGraphAsAnAdjacentArray(edges);
   console.log({ graphAsArray });
