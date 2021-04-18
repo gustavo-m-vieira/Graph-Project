@@ -1,14 +1,8 @@
 import minimist from 'minimist';
 import fs from 'fs';
-<<<<<<< HEAD
-import { catchEdges } from '../functions';
 import { createGraph as createGraphAsAnAdjacentArray } from '../functions/array';
 import { createGraph as createGraphAsAMatrix } from '../functions/matrix';
-=======
 import { catchEdges, getGraus } from '../functions';
-import { createGraphAsAnAdjacentArray } from '../functions/array';
-import { createGraphAsAMatrix } from '../functions/matrix';
->>>>>>> pedraoHasNoClueHowToJs
 
 const { path } = minimist(process.argv.slice(2));
 
