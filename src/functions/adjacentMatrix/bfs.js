@@ -6,7 +6,7 @@
 */
 export function bfs(s, graph) {
   const size = graph.length;
-  const visited = new Array(size + 1);
+  const visited = new Array(size);
 
   let queue = [s];
   visited[s] = true;

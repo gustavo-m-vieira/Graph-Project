@@ -14,6 +14,8 @@ async function main() {
   console.log({ graph });
 
   graph.saveGraphInfosFile();
+
+  console.log({ bfs: graph.runBFS(2) });
 }
 
 main();
