@@ -9,7 +9,7 @@ const { path = './src/testFiles/testInputFiles/test1.txt' } = minimist(process.a
 * @command npx -p @babel/core -p @babel/node babel-node --presets @babel/preset-env ./src/scripts/main.js --path {PATH}
 */
 async function main() {
-  const graph = new Graph({ memoryStructure: 'array', filePath: path });
+  const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
 
   console.log({ graph });
 

@@ -1,6 +1,6 @@
 import fs from 'fs';
-import * as GraphAsArray from '../functions/array';
-import * as GraphAsMatrix from '../functions/matrix';
+import * as GraphAsAdjacentVector from '../functions/adjacentVector';
+import * as GraphAsAdjacentMatrix from '../functions/adjacentMatrix';
 import {
   catchEdges,
   getDegrees,
@@ -29,14 +29,14 @@ export class Graph {
     let functions;
 
     switch (memoryStructure) {
-      case 'array':
-        functions = GraphAsArray;
+      case 'adjacent vector':
+        functions = GraphAsAdjacentVector;
         break;
-      case 'matrix':
-        functions = GraphAsMatrix;
+      case 'adjacent matrix':
+        functions = GraphAsAdjacentMatrix;
         break;
       default:
-        throw Error('memoryStructure should be one of this options: "array" or "matrix".');
+        throw Error('memoryStructure should be one of this options: "adjacent vector" or "adjacent matrix".');
     }
 
     Object.entries(functions).forEach(([key, value]) => { this[key] = value; });
