@@ -6,16 +6,29 @@
 */
 export function dfs(s, graph) {
   const visited = new Set();
+  const fathers = new Array(graph.length + 1);
+  const levels = new Array(graph.length + 1);
+  levels[s] = 0;
 
   const dfsAux = (v) => {
     visited.add(v);
 
     for (let node = 1; node <= graph.length; node += 1) {
       if (graph[v][node]) {
-        if (!visited.has(node)) dfsAux(node);
+        if (!visited.has(node)) {
+          fathers[node] = v;
+          levels[node] = levels[v] + 1;
+
+          dfsAux(node);
+        }
       }
     }
   };
 
   dfsAux(s);
+
+  return {
+    fathers,
+    levels,
+  };
 }
