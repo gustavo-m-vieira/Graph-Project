@@ -4,10 +4,13 @@
 * @param {Number} s - start vertice
 * @param {Set[]} graph - Graph
 */
-export function bfs(s, graph) {
+export function bfs(s, graph, targetNode) {
   const size = graph.length;
   const visited = new Array(size + 1);
-
+  const fathers = new Array(size + 1);
+  const levels = new Array(size);
+  fathers[s] = null;
+  levels[s] = 0;
   let queue = [s];
   visited[s] = true;
 
@@ -19,6 +22,9 @@ export function bfs(s, graph) {
         if (!visited[node]) {
           queue.push(node);
           visited[node] = true;
+          levels[node] = levels[s] + 1;
+          fathers[node] = s;
+          // if (targetNode &&)
         }
       }
     }
