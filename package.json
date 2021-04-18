@@ -1,0 +1,33 @@
+{
+  "name": "graph-project",
+  "version": "0.0.1",
+  "description": "Graph Project to TeoGraph Class from UFRJ",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "lint-staged": {
+    "*.js": "eslint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gustavo-m-vieira/Graph-Project.git"
+  },
+  "author": "Gustavo Vieira",
+  "license": "ISC",
+  "homepage": "https://github.com/gustavo-m-vieira/Graph-Project#readme",
+  "devDependencies": {
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.2.13"
+  }
+}
