@@ -18,11 +18,11 @@ function createEmptyMatrix(size) {
 }
 
 /**
-* @name createGraphAsAMatrix
+* @name createGraph
 * @description Receives an array of edges an returns a graph.
 * @param {Number[]} edges - an array of Edges
 */
-export function createGraphAsAMatrix(edges) {
+export function createGraph(edges) {
   const lastNode = getLastNode(edges);
   const graph = createEmptyMatrix(lastNode);
 

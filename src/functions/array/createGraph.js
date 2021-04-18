@@ -1,10 +1,10 @@
 import { getLastNode } from '../getLastNode';
 /**
-* @name createGraphAsAnAdjacentArray
+* @name createGraph
 * @description Receives an array of edges an returns a graph.
 * @param {Number[]} edges - an array of Edges
 */
-export function createGraphAsAnAdjacentArray(edges) {
+export function createGraph(edges) {
   const lastNode = getLastNode(edges);
   const graph = new Array(lastNode);
 

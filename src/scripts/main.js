@@ -1,8 +1,8 @@
 import minimist from 'minimist';
 import fs from 'fs';
 import { catchEdges } from '../functions';
-import { createGraphAsAnAdjacentArray } from '../functions/array';
-import { createGraphAsAMatrix } from '../functions/matrix';
+import { createGraph as createGraphAsAnAdjacentArray } from '../functions/array';
+import { createGraph as createGraphAsAMatrix } from '../functions/matrix';
 
 const { path } = minimist(process.argv.slice(2));
 
