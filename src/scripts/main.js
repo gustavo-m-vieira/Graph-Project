@@ -1,14 +1,7 @@
 import minimist from 'minimist';
-import fs from 'fs';
-import { createGraph as createGraphAsAnAdjacentArray } from '../functions/array';
-import { createGraph as createGraphAsAMatrix } from '../functions/matrix';
-import { catchEdges, getDegrees } from '../functions';
+import { Graph } from '../classes';
 
-const { path } = minimist(process.argv.slice(2));
-
-if (!path) {
-  throw new Error('Missing required parameters: path. Try running again with --path param');
-}
+const { path = './src/testFiles/testInputFiles/test1.txt' } = minimist(process.argv.slice(2));
 
 /**
 * @name Main
@@ -16,31 +9,11 @@ if (!path) {
 * @command npx -p @babel/core -p @babel/node babel-node --presets @babel/preset-env ./src/scripts/main.js --path {PATH}
 */
 async function main() {
-  const Buffer = fs.readFileSync(path);
+  const graph = new Graph({ memoryStructure: 'array', filePath: path });
 
-  console.log({ BufferAsString: Buffer.toString() });
+  console.log({ graph });
 
-  const edges = catchEdges(Buffer);
-  console.log({ edges });
-
-  const {
-    lowestDegree,
-    highestDegree,
-    medianDegree,
-    averageDegree,
-  } = getDegrees(edges);
-  console.log({
-    lowestDegree,
-    highestDegree,
-    medianDegree,
-    averageDegree,
-  });
-
-  const graphAsArray = createGraphAsAnAdjacentArray(edges);
-  console.log({ graphAsArray });
-
-  const graphAsMatrix = createGraphAsAMatrix(edges);
-  console.log({ graphAsMatrix });
+  graph.saveGraphInfosFile();
 }
 
 main();
