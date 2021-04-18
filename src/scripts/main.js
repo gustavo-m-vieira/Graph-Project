@@ -1,14 +1,8 @@
 import minimist from 'minimist';
 import fs from 'fs';
-<<<<<<< HEAD
-import { catchEdges } from '../functions';
 import { createGraph as createGraphAsAnAdjacentArray } from '../functions/array';
 import { createGraph as createGraphAsAMatrix } from '../functions/matrix';
-=======
-import { catchEdges, getGraus } from '../functions';
-import { createGraphAsAnAdjacentArray } from '../functions/array';
-import { createGraphAsAMatrix } from '../functions/matrix';
->>>>>>> pedraoHasNoClueHowToJs
+import { catchEdges, getDegrees } from '../functions';
 
 const { path } = minimist(process.argv.slice(2));
 
@@ -30,10 +24,16 @@ async function main() {
   console.log({ edges });
 
   const {
-    menorGrau, maiorGrau, mediaGrau, medianaGrau,
-  } = getGraus(edges);
+    lowestDegree,
+    highestDegree,
+    medianDegree,
+    averageDegree,
+  } = getDegrees(edges);
   console.log({
-    menorGrau, maiorGrau, mediaGrau, medianaGrau,
+    lowestDegree,
+    highestDegree,
+    medianDegree,
+    averageDegree,
   });
 
   const graphAsArray = createGraphAsAnAdjacentArray(edges);
