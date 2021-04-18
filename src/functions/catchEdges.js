@@ -6,5 +6,5 @@
 export function catchEdges(Buffer) {
   const bufferAsString = Buffer.toString();
   const [, ...nestedEdges] = bufferAsString.split('\n');
-  return nestedEdges.map((edge) => edge.split(' ').map((vertice) => parseInt(vertice, 10)));
+  return nestedEdges.map((edge) => edge.split(' ').map((node) => parseInt(node, 10)));
 }
