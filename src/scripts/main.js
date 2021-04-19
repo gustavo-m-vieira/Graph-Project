@@ -9,17 +9,21 @@ const { path = './src/testFiles/testInputFiles/test1.txt' } = minimist(process.a
 * @command npx -p @babel/core -p @babel/node babel-node --presets @babel/preset-env ./src/scripts/main.js --path {PATH}
 */
 async function main() {
-  const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
+  try {
+    const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
 
-  console.log({ graph });
+    console.log({ graph });
 
-  graph.saveGraphInfosFile();
+    graph.saveGraphInfosFile();
 
-  console.log({
-    bfs: graph.runBFS(2),
-    dfs: graph.runDFS(2),
-    minimumPath: graph.findMinimumPath(2, 3),
-  });
+    console.log({
+      bfs: graph.runBFS(2),
+      dfs: graph.runDFS(2),
+      minimumPath: graph.findMinimumPath(2, 3),
+    });
+  } catch (error) {
+    console.log('Something went wrong', { error });
+  }
 }
 
 main();

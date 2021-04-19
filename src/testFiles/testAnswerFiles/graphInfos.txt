@@ -1,7 +1,7 @@
 
-Nº Nodes = 6
-Nº Edges = 5
-Lowest Degree = 1
-Highest Degree = 4
-Median Degree = 2
-Average Degree = 2
+Nº Nodes = 0
+Nº Edges = 0
+Lowest Degree = undefined
+Highest Degree = undefined
+Median Degree = undefined
+Average Degree = undefined

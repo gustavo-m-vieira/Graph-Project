@@ -15,14 +15,17 @@ import {
 * @param {Buffer} [Buffer] - Buffer of informations
 */
 export class Graph {
-  constructor({ memoryStructure, filePath, buffer }) {
-    const Buffer = buffer || fs.readFileSync(filePath);
+  constructor({
+    memoryStructure, filePath, buffer, size,
+  }) {
+    if (!filePath && !buffer && !size) throw new Error('Missing filePath or buffer or size.');
+    const Buffer = filePath ? fs.readFileSync(filePath) : buffer;
 
-    this.edges = catchEdges(Buffer);
+    this.edges = Buffer ? catchEdges(Buffer) : [];
     this.saveDegreesInfos();
     this.saveFunctions(memoryStructure);
 
-    this.GraphStructure = this.createGraph(this.edges);
+    this.GraphStructure = this.createGraph(this.edges, size);
   }
 
   saveFunctions(memoryStructure) {
@@ -70,16 +73,20 @@ export class Graph {
 
   runBFS(sourceNode) {
     if (!sourceNode) throw new Error('Missing sourceNode');
+    if (sourceNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
     return this.bfs(sourceNode, this.GraphStructure);
   }
 
   runDFS(sourceNode) {
     if (!sourceNode) throw new Error('Missing sourceNode');
+    if (sourceNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
     return this.dfs(sourceNode, this.GraphStructure);
   }
 
   findMinimumPath(sourceNode, targetNode) {
     if (!sourceNode || !targetNode) throw new Error('Missing sourceNode e/or targetNode');
+    if (sourceNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
+    if (targetNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
     const {
       minimumPath,
       minimumPathSize,

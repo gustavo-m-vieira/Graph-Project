@@ -22,8 +22,8 @@ function createEmptyMatrix(size) {
 * @description Receives an array of edges an returns a graph.
 * @param {Number[]} edges - an array of Edges
 */
-export function createGraph(edges) {
-  const lastNode = getLastNode(edges);
+export function createGraph(edges, size) {
+  const lastNode = edges ? getLastNode(edges) : size;
   const graph = createEmptyMatrix(lastNode);
 
   for (const [node1, node2] of edges) {
