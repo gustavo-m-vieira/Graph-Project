@@ -1,26 +1,14 @@
+import { Graph } from '../../classes';
+import { calculateMinimumPath } from '../calculateMinimumPath';
+
 /**
 * @name bfs
 * @description Runs Breadth First Search on a graph.
 * @param {Number} s - start vertice
 * @param {Set[]} graph - Graph
 */
-
-function findMinimumPath(sourceNode, targetNode, fathers) {
-  const minimumPath = [];
-  let currentNode = targetNode;
-  while (currentNode !== sourceNode) {
-    minimumPath.push(currentNode);
-    currentNode = fathers[currentNode];
-  }
-  minimumPath.push(sourceNode);
-
-  return {
-    minimumPathSize: minimumPath.length,
-    minimumPath: minimumPath.reverse(),
-  };
-}
-
 export function bfs(sourceNode, graph, targetNode) {
+  const inducedTree = new Graph({ size: graph.length, memoryStructure: 'adjacent matrix' });
   const size = graph.length;
   const visited = new Array(size);
   const fathers = new Array(size);
@@ -42,6 +30,7 @@ export function bfs(sourceNode, graph, targetNode) {
           visited[node] = true;
           levels[node] = levels[currentNode] + 1;
           fathers[node] = currentNode;
+          inducedTree.addEdge(currentNode, node);
           if (targetNode && node === targetNode) {
             foundNode = true;
             break;
@@ -53,17 +42,18 @@ export function bfs(sourceNode, graph, targetNode) {
       break;
     }
   }
-  if (targetNode && foundNode) {
-    return {
-      ...findMinimumPath(sourceNode, targetNode, fathers),
-      foundNode,
-      fathers,
-      levels,
-    };
-  }
+  let minimumPath;
+  let minimumPathSize;
+  if (targetNode && foundNode) ({ minimumPath, minimumPathSize } = calculateMinimumPath(targetNode, sourceNode, fathers));
+
+  inducedTree.checkIfShouldRegenerate();
 
   return {
+    minimumPath,
+    foundNode,
     fathers,
+    minimumPathSize,
     levels,
+    inducedTree,
   };
 }
