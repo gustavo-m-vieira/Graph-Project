@@ -1,15 +1,10 @@
-// export function components(graph, func) {
-//   const checker = (totalOfComponents, originalGraph) => originalGraph.every((v) => totalOfComponents.includes(v));
-//   let components = new Set();
-//   let setzin = set ();
-//   let copiadografo = graph.copy();
-
-//   while (!checker(components, graph)) {
-//     const { visited } = func(graph);
-//     components = new Set([...components, ...visited]);
-
-//   }
-// }
+/**
+ *
+ * @name components
+ * @param {Array()} graph
+ * @param {Function()} func
+ * @returns {Object[]} connectedComponents
+ */
 
 export function components(graph, func) {
   const nodes = new Set();
@@ -22,5 +17,9 @@ export function components(graph, func) {
     connectedComponents.push(inducedTree);
     checker(visited);
   }
-  return connectedComponents;
+  return connectedComponents.sort(({ nodes: nodesA }, { nodes: nodesB }) => {
+    if (nodesA < nodesB) return 1;
+    if (nodesA > nodesB) return -1;
+    return 0;
+  });
 }
