@@ -10,7 +10,7 @@ import {
 * @name Graph
 * @description A class that represents a Graph.
 * @param {Object} event
-* @param {'matrix' , 'array'} memoryStructure - if should represents as an array or a matrix
+* @param {'adjacent vector' , 'adjacent matrix'} memoryStructure - if should represents as an array or a matrix
 * @param {String} [filePath] - path to the file
 * @param {Buffer} [Buffer] - Buffer of informations
 */
@@ -60,6 +60,8 @@ export class Graph {
   }
 
   saveGraphInfosFile(path = './src/testFiles/testAnswerFiles/graphInfos.txt') {
+    this.checkIfShouldRegenerate();
+
     let fileAsString = '';
     fileAsString += `\nNº Nodes = ${this.GraphStructure.length}`;
     fileAsString += `\nNº Edges = ${this.edges.length}`;
@@ -72,21 +74,30 @@ export class Graph {
   }
 
   runBFS(sourceNode) {
+    this.checkIfShouldRegenerate();
+
     if (!sourceNode) throw new Error('Missing sourceNode');
     if (sourceNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
+
     return this.bfs(sourceNode, this.GraphStructure);
   }
 
   runDFS(sourceNode) {
+    this.checkIfShouldRegenerate();
+
     if (!sourceNode) throw new Error('Missing sourceNode');
     if (sourceNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
+
     return this.dfs(sourceNode, this.GraphStructure);
   }
 
   findMinimumPath(sourceNode, targetNode) {
+    this.checkIfShouldRegenerate();
+
     if (!sourceNode || !targetNode) throw new Error('Missing sourceNode e/or targetNode');
     if (sourceNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
     if (targetNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
+
     const {
       minimumPath,
       minimumPathSize,
@@ -96,5 +107,19 @@ export class Graph {
       minimumPath,
       minimumPathSize,
     };
+  }
+
+  addEdge(sourceNode, targetNode) {
+    if (!sourceNode || !targetNode) throw new Error('Missing sourceNode e/or targetNode');
+
+    this.edges.push([sourceNode, targetNode]);
+    this.shouldRegenerate = true;
+  }
+
+  checkIfShouldRegenerate() {
+    if (this.shouldRegenerate) {
+      this.GraphStructure = this.createGraph(this.edges);
+    }
+    this.shouldRegenerate = false;
   }
 }

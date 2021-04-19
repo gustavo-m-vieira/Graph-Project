@@ -1,6 +1,8 @@
 import minimist from 'minimist';
+import util from 'util';
 import { Graph } from '../classes';
 
+util.inspect.defaultOptions.depth = null;
 const { path = './src/testFiles/testInputFiles/test1.txt' } = minimist(process.argv.slice(2));
 
 /**
@@ -10,7 +12,7 @@ const { path = './src/testFiles/testInputFiles/test1.txt' } = minimist(process.a
 */
 async function main() {
   try {
-    const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
+    const graph = new Graph({ memoryStructure: 'adjacent matrix', filePath: path });
 
     console.log({ graph });
 

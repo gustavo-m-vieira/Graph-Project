@@ -5,7 +5,7 @@ import { getLastNode } from '../getLastNode';
 * @param {Number[]} edges - an array of Edges
 */
 export function createGraph(edges, size) {
-  const lastNode = edges ? getLastNode(edges) : size;
+  const lastNode = edges && edges.length ? getLastNode(edges) : size;
   const graph = new Array(lastNode + 1);
 
   for (const [node1, node2] of edges) {
