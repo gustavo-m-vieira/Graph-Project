@@ -1,5 +1,5 @@
 
-Nº Nodes = 6
+Nº Nodes = 5
 Nº Edges = 5
 Lowest Degree = 1
 Highest Degree = 4
