@@ -23,10 +23,10 @@ export class Graph {
     const Buffer = filePath ? fs.readFileSync(filePath) : buffer;
 
     this.edges = Buffer ? catchEdges(Buffer) : [];
-    this.saveDegreesInfos();
     this.saveFunctions(memoryStructure);
 
     this.GraphStructure = this.createGraph(this.edges, size);
+    this.saveDegreesInfos();
   }
 
   saveFunctions(memoryStructure) {
@@ -58,13 +58,14 @@ export class Graph {
     this.highestDegree = highestDegree;
     this.medianDegree = medianDegree;
     this.averageDegree = averageDegree;
+    this.nodes = this.GraphStructure.length - 1;
   }
 
   saveGraphInfosFile(path = './src/testFiles/testAnswerFiles/graphInfos.txt') {
     this.checkIfShouldRegenerate();
 
     let fileAsString = '';
-    fileAsString += `\nNº Nodes = ${this.GraphStructure.length}`;
+    fileAsString += `\nNº Nodes = ${this.GraphStructure.length - 1}`;
     fileAsString += `\nNº Edges = ${this.edges.length}`;
     fileAsString += `\nLowest Degree = ${this.lowestDegree}`;
     fileAsString += `\nHighest Degree = ${this.highestDegree}`;
@@ -121,6 +122,7 @@ export class Graph {
   checkIfShouldRegenerate() {
     if (this.shouldRegenerate) {
       this.GraphStructure = this.createGraph(this.edges);
+      this.saveDegreesInfos();
     }
     this.shouldRegenerate = false;
   }
