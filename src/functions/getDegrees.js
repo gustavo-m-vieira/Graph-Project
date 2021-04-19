@@ -28,7 +28,7 @@ export function getDegrees(edges) {
   return {
     lowestDegree,
     highestDegree,
-    medianDegree,
-    averageDegree,
+    medianDegree: medianDegree || undefined,
+    averageDegree: averageDegree || undefined,
   };
 }
