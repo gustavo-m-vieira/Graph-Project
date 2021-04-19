@@ -4,6 +4,7 @@ import * as GraphAsAdjacentMatrix from '../functions/adjacentMatrix';
 import {
   catchEdges,
   getDegrees,
+  calculateDiameter,
 } from '../functions';
 
 /**
@@ -69,6 +70,7 @@ export class Graph {
     fileAsString += `\nHighest Degree = ${this.highestDegree}`;
     fileAsString += `\nMedian Degree = ${this.medianDegree}`;
     fileAsString += `\nAverage Degree = ${this.averageDegree}`;
+    fileAsString += `\nDiameter = ${this.calculateDiameter()}`;
 
     fs.writeFileSync(path, fileAsString);
   }
@@ -121,5 +123,13 @@ export class Graph {
       this.GraphStructure = this.createGraph(this.edges);
     }
     this.shouldRegenerate = false;
+  }
+
+  calculateDiameter() {
+    this.checkIfShouldRegenerate();
+
+    this.diameter = calculateDiameter(this.GraphStructure, this.bfs);
+
+    return this.diameter;
   }
 }

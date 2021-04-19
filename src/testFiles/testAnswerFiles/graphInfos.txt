@@ -5,3 +5,4 @@ Lowest Degree = 1
 Highest Degree = 4
 Median Degree = 2
 Average Degree = 2
+Diameter = 2
