@@ -4,29 +4,66 @@
 * @param {Number} s - start vertice
 * @param {Set[]} graph - Graph
 */
-export function bfs(s, graph, targetNode) {
+
+function findMinimumPath(sourceNode, targetNode, fathers) {
+  const minimumPath = [];
+  let currentNode = targetNode;
+  while (currentNode !== sourceNode) {
+    minimumPath.push(currentNode);
+    currentNode = fathers[currentNode];
+  }
+  minimumPath.push(sourceNode);
+
+  return {
+    minimumPathSize: minimumPath.length,
+    minimumPath: minimumPath.reverse(),
+  };
+}
+
+export function bfs(sourceNode, graph, targetNode) {
   const size = graph.length;
-  const visited = new Array(size + 1);
-  const fathers = new Array(size + 1);
+  const visited = new Array(size);
+  const fathers = new Array(size);
   const levels = new Array(size);
-  fathers[s] = null;
-  levels[s] = 0;
-  let queue = [s];
-  visited[s] = true;
+  fathers[sourceNode] = null;
+  levels[sourceNode] = 0;
+  let queue = [sourceNode];
+  visited[sourceNode] = true;
+  let foundNode = false;
+  let currentNode;
 
   while (queue.length) {
-    ([s, ...queue] = queue);
+    ([currentNode, ...queue] = queue);
 
     for (let node = 1; node <= graph.length; node += 1) {
-      if (graph[s][node]) {
+      if (graph[currentNode][node]) {
         if (!visited[node]) {
           queue.push(node);
           visited[node] = true;
-          levels[node] = levels[s] + 1;
-          fathers[node] = s;
-          // if (targetNode &&)
+          levels[node] = levels[currentNode] + 1;
+          fathers[node] = currentNode;
+          if (targetNode && node === targetNode) {
+            foundNode = true;
+            break;
+          }
         }
       }
     }
+    if (targetNode && foundNode) {
+      break;
+    }
   }
+  if (targetNode && foundNode) {
+    return {
+      ...findMinimumPath(sourceNode, targetNode, fathers),
+      foundNode,
+      fathers,
+      levels,
+    };
+  }
+
+  return {
+    fathers,
+    levels,
+  };
 }
