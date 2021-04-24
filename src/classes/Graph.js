@@ -144,9 +144,10 @@ export class Graph {
     this.components = components(this.GraphStructure, func);
     [this.biggestComponent] = this.components;
     [this.smallestComponent] = this.components.slice(-1);
-    const numberOfComponents = this.components.length;
+    this.numberOfComponents = this.components.length;
     let ComponentsAsStrings = '\tConnected Components Info:';
-    for (let component = 0; component < numberOfComponents; component += 1) {
+    ComponentsAsStrings += `\nNumber of components: ${this.numberOfComponents}`;
+    for (let component = 0; component < this.numberOfComponents; component += 1) {
       ComponentsAsStrings += `\nComponent: ${component + 1}`;
       ComponentsAsStrings += `\n\tSize: ${this.components[component].size}`;
       ComponentsAsStrings += `\n\tNodes: ${this.components[component].nodes}\n`;
@@ -157,8 +158,8 @@ export class Graph {
     ComponentsAsStrings += `\nSmallest Component Size: ${this.smallestComponent.size}`;
     ComponentsAsStrings += `\nSmallest Component Nodes: ${this.smallestComponent.nodes}`;
 
-    this.componentInfo = ComponentsAsStrings;
+    this.componentsInfo = ComponentsAsStrings;
 
-    return this.componentInfo;
+    return this.componentsInfo;
   }
 }
