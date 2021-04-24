@@ -5,6 +5,7 @@ import {
   catchEdges,
   getDegrees,
   calculateDiameter,
+  components,
 } from '../functions';
 
 /**
@@ -71,7 +72,10 @@ export class Graph {
     fileAsString += `\nHighest Degree = ${this.highestDegree}`;
     fileAsString += `\nMedian Degree = ${this.medianDegree}`;
     fileAsString += `\nAverage Degree = ${this.averageDegree}`;
-    fileAsString += `\nDiameter = ${this.calculateDiameter()}`;
+    fileAsString += `\nDiameter = ${this.calculateDiameter()}\n`;
+    if (this.componentInfo) {
+      fileAsString += this.componentInfo;
+    }
 
     fs.writeFileSync(path, fileAsString);
   }
@@ -133,5 +137,28 @@ export class Graph {
     this.diameter = calculateDiameter(this.GraphStructure, this.bfs);
 
     return this.diameter;
+  }
+
+  connectedComponents(func = this.bfs) {
+    this.checkIfShouldRegenerate();
+    this.components = components(this.GraphStructure, func);
+    [this.biggestComponent] = this.components;
+    [this.smallestComponent] = this.components.slice(-1);
+    const numberOfComponents = this.components.length;
+    let ComponentsAsStrings = '\tConnected Components Info:';
+    for (let component = 0; component < numberOfComponents; component += 1) {
+      ComponentsAsStrings += `\nComponent: ${component + 1}`;
+      ComponentsAsStrings += `\n\tSize: ${this.components[component].size}`;
+      ComponentsAsStrings += `\n\tNodes: ${this.components[component].nodes}\n`;
+    }
+    ComponentsAsStrings += '\n-------------------------';
+    ComponentsAsStrings += `\nBiggest Component Size: ${this.biggestComponent.size}`;
+    ComponentsAsStrings += `\nBiggest Component Nodes: ${this.biggestComponent.nodes}\n`;
+    ComponentsAsStrings += `\nSmallest Component Size: ${this.smallestComponent.size}`;
+    ComponentsAsStrings += `\nSmallest Component Nodes: ${this.smallestComponent.nodes}`;
+
+    this.componentInfo = ComponentsAsStrings;
+
+    return this.componentInfo;
   }
 }

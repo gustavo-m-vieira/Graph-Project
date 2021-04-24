@@ -3,4 +3,4 @@ export * from './getLastNode';
 export * from './getDegrees';
 export * from './calculateMinimumPath';
 export * from './calculateDiameter';
-export * from './connectedComponents';
+export * from './components';
