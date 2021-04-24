@@ -64,7 +64,7 @@ export class Graph {
 
   saveGraphInfosFile(path = './src/testFiles/testAnswerFiles/graphInfos.txt') {
     this.checkIfShouldRegenerate();
-
+    this.connectedComponents();
     let fileAsString = '';
     fileAsString += `\nNº Nodes = ${this.GraphStructure.length - 1}`;
     fileAsString += `\nNº Edges = ${this.edges.length}`;
@@ -73,9 +73,7 @@ export class Graph {
     fileAsString += `\nMedian Degree = ${this.medianDegree}`;
     fileAsString += `\nAverage Degree = ${this.averageDegree}`;
     fileAsString += `\nDiameter = ${this.calculateDiameter()}\n`;
-    if (this.componentInfo) {
-      fileAsString += this.componentInfo;
-    }
+    fileAsString += this.componentsInfo;
 
     fs.writeFileSync(path, fileAsString);
   }
