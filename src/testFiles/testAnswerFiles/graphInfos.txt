@@ -6,3 +6,51 @@ Highest Degree = 99
 Median Degree = 37
 Average Degree = 68.70077084793273
 Diameter = not calculated
+	Connected Components Info:
+		Number of components: 10
+		Component: 1
+			Size: undefined
+			Nodes: 9990
+
+		Component: 2
+			Size: undefined
+			Nodes: 9990
+
+		Component: 3
+			Size: undefined
+			Nodes: 9990
+
+		Component: 4
+			Size: undefined
+			Nodes: 9990
+
+		Component: 5
+			Size: undefined
+			Nodes: 9990
+
+		Component: 6
+			Size: undefined
+			Nodes: 9990
+
+		Component: 7
+			Size: undefined
+			Nodes: 9990
+
+		Component: 8
+			Size: undefined
+			Nodes: 9990
+
+		Component: 9
+			Size: undefined
+			Nodes: 9990
+
+		Component: 10
+			Size: undefined
+			Nodes: 9990
+
+-------------------------
+		Biggest Component Size: undefined
+		Biggest Component Nodes: 9990
+
+		Smallest Component Size: undefined
+		Smallest Component Nodes: 9990

@@ -8,7 +8,9 @@ import { calculateMinimumPath } from '../calculateMinimumPath';
 * @param {Number} s - start vertice
 * @param {Set[]} graph - Graph
 */
-export function bfs(sourceNode, graph, targetNode, shouldGenerateInducedTree = false) {
+export function bfs({
+  sourceNode, graph, targetNode, shouldGenerateInducedTree = false,
+}) {
   const inducedTree = shouldGenerateInducedTree ? new Graph({ size: graph.length, memoryStructure: 'adjacent matrix' }) : undefined;
   const size = graph.length;
   const visited = new Array(size);
@@ -49,6 +51,11 @@ export function bfs(sourceNode, graph, targetNode, shouldGenerateInducedTree = f
 
   if (shouldGenerateInducedTree) inducedTree.checkIfShouldRegenerate();
 
+  const visitedNodes = [];
+  for (let node = 1; node < graph.length; node += 1) {
+    if (visited[node]) visitedNodes.push(node);
+  }
+
   return {
     minimumPath,
     foundNode,
@@ -56,5 +63,6 @@ export function bfs(sourceNode, graph, targetNode, shouldGenerateInducedTree = f
     minimumPathSize,
     levels,
     inducedTree,
+    visited: visitedNodes,
   };
 }

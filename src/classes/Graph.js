@@ -1,4 +1,5 @@
 import fs from 'fs';
+// eslint-disable-next-line import/no-cycle
 import * as GraphAsAdjacentVector from '../functions/adjacentVector';
 // eslint-disable-next-line import/no-cycle
 import * as GraphAsAdjacentMatrix from '../functions/adjacentMatrix';
@@ -80,27 +81,27 @@ export class Graph {
     fileAsString += `\nMedian Degree = ${this.medianDegree}`;
     fileAsString += `\nAverage Degree = ${this.averageDegree}`;
     fileAsString += `\nDiameter = ${this.diameter || 'not calculated'}`;
-    fileAsString += this.componentsInfo;
+    fileAsString += this.componentsInfo ? `\n${this.componentsInfo}` : '';
 
     fs.writeFileSync(path, fileAsString);
   }
 
-  runBFS(sourceNode) {
+  runBFS(sourceNode, shouldGenerateInducedTree = false) {
     this.checkIfShouldRegenerate();
 
     if (!sourceNode) throw new Error('Missing sourceNode');
     if (sourceNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
 
-    return this.bfs(sourceNode, this.GraphStructure);
+    return this.bfs({ sourceNode, graph: this.GraphStructure, shouldGenerateInducedTree });
   }
 
-  runDFS(sourceNode) {
+  runDFS(sourceNode, shouldGenerateInducedTree = false) {
     this.checkIfShouldRegenerate();
 
     if (!sourceNode) throw new Error('Missing sourceNode');
     if (sourceNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
 
-    return this.dfs(sourceNode, this.GraphStructure);
+    return this.dfs({ sourceNode, graph: this.GraphStructure, shouldGenerateInducedTree });
   }
 
   findMinimumPath(sourceNode, targetNode) {
@@ -113,7 +114,7 @@ export class Graph {
     const {
       minimumPath,
       minimumPathSize,
-    } = this.bfs(sourceNode, this.GraphStructure, targetNode);
+    } = this.bfs({ sourceNode, graph: this.GraphStructure, targetNode });
 
     return {
       minimumPath,
@@ -149,18 +150,20 @@ export class Graph {
     [this.biggestComponent] = this.components;
     [this.smallestComponent] = this.components.slice(-1);
     this.numberOfComponents = this.components.length;
-    let ComponentsAsStrings = '\tConnected Components Info:';
-    ComponentsAsStrings += `\nNumber of components: ${this.numberOfComponents}`;
+    let tabs = '\t';
+    let ComponentsAsStrings = `${tabs}Connected Components Info:`;
+    tabs += tabs;
+    ComponentsAsStrings += `\n${tabs}Number of components: ${this.numberOfComponents}`;
     for (let component = 0; component < this.numberOfComponents; component += 1) {
-      ComponentsAsStrings += `\nComponent: ${component + 1}`;
-      ComponentsAsStrings += `\n\tSize: ${this.components[component].size}`;
-      ComponentsAsStrings += `\n\tNodes: ${this.components[component].nodes}\n`;
+      ComponentsAsStrings += `\n${tabs}Component: ${component + 1}`;
+      ComponentsAsStrings += `\n${tabs}\tSize: ${this.components[component].size}`;
+      ComponentsAsStrings += `\n${tabs}\tNodes: ${this.components[component].nodes}\n`;
     }
     ComponentsAsStrings += '\n-------------------------';
-    ComponentsAsStrings += `\nBiggest Component Size: ${this.biggestComponent.size}`;
-    ComponentsAsStrings += `\nBiggest Component Nodes: ${this.biggestComponent.nodes}\n`;
-    ComponentsAsStrings += `\nSmallest Component Size: ${this.smallestComponent.size}`;
-    ComponentsAsStrings += `\nSmallest Component Nodes: ${this.smallestComponent.nodes}`;
+    ComponentsAsStrings += `\n${tabs}Biggest Component Size: ${this.biggestComponent.size}`;
+    ComponentsAsStrings += `\n${tabs}Biggest Component Nodes: ${this.biggestComponent.nodes}\n`;
+    ComponentsAsStrings += `\n${tabs}Smallest Component Size: ${this.smallestComponent.size}`;
+    ComponentsAsStrings += `\n${tabs}Smallest Component Nodes: ${this.smallestComponent.nodes}`;
 
     this.componentsInfo = ComponentsAsStrings;
 
