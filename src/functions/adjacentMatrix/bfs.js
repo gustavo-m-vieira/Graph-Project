@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { Graph } from '../../classes';
 import { calculateMinimumPath } from '../calculateMinimumPath';
 
@@ -7,8 +8,8 @@ import { calculateMinimumPath } from '../calculateMinimumPath';
 * @param {Number} s - start vertice
 * @param {Set[]} graph - Graph
 */
-export function bfs(sourceNode, graph, targetNode) {
-  const inducedTree = new Graph({ size: graph.length, memoryStructure: 'adjacent matrix' });
+export function bfs(sourceNode, graph, targetNode, shouldGenerateInducedTree = false) {
+  const inducedTree = shouldGenerateInducedTree ? new Graph({ size: graph.length, memoryStructure: 'adjacent matrix' }) : undefined;
   const size = graph.length;
   const visited = new Array(size);
   const fathers = new Array(size);
@@ -30,7 +31,7 @@ export function bfs(sourceNode, graph, targetNode) {
           visited[node] = true;
           levels[node] = levels[currentNode] + 1;
           fathers[node] = currentNode;
-          inducedTree.addEdge(currentNode, node);
+          if (shouldGenerateInducedTree) inducedTree.addEdge(currentNode, node);
           if (targetNode && node === targetNode) {
             foundNode = true;
             break;
@@ -46,7 +47,7 @@ export function bfs(sourceNode, graph, targetNode) {
   let minimumPathSize;
   if (targetNode && foundNode) ({ minimumPath, minimumPathSize } = calculateMinimumPath(targetNode, sourceNode, fathers));
 
-  inducedTree.checkIfShouldRegenerate();
+  if (shouldGenerateInducedTree) inducedTree.checkIfShouldRegenerate();
 
   return {
     minimumPath,

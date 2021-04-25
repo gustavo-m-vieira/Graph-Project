@@ -1,0 +1,460 @@
+
+{
+  "header": {
+    "reportVersion": 1,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20210425.110442.13181.0.001.json",
+    "dumpEventTime": "2021-04-25T11:04:42Z",
+    "dumpEventTimeStamp": "1619359482980",
+    "processId": 13181,
+    "cwd": "/home/gustavomov/Documentos/Graph-Project",
+    "commandLine": [
+      "/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node",
+      "/home/gustavomov/Documentos/Graph-Project/node_modules/@babel/node/lib/_babel-node",
+      "--presets",
+      "@babel/preset-env",
+      "./src/scripts/main.js"
+    ],
+    "nodejsVersion": "v12.15.0",
+    "glibcVersionRuntime": "2.33",
+    "glibcVersionCompiler": "2.17",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "linux",
+    "componentVersions": {
+      "node": "12.15.0",
+      "v8": "7.7.299.13-node.16",
+      "uv": "1.33.1",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.4",
+      "http_parser": "2.9.3",
+      "openssl": "1.1.1d",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.15.0/node-v12.15.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.15.0/node-v12.15.0.tar.gz"
+    },
+    "osName": "Linux",
+    "osRelease": "5.9.16-1-MANJARO",
+    "osVersion": "#1 SMP PREEMPT Mon Dec 21 22:00:46 UTC 2020",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz",
+        "speed": 1800,
+        "user": 6007300,
+        "nice": 2500,
+        "sys": 1521600,
+        "idle": 68659900,
+        "irq": 168900
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz",
+        "speed": 1800,
+        "user": 6176800,
+        "nice": 1800,
+        "sys": 1559800,
+        "idle": 68608100,
+        "irq": 127100
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz",
+        "speed": 1800,
+        "user": 5465800,
+        "nice": 800,
+        "sys": 1642900,
+        "idle": 68486700,
+        "irq": 457800
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz",
+        "speed": 1800,
+        "user": 5980300,
+        "nice": 7800,
+        "sys": 1597100,
+        "idle": 68740000,
+        "irq": 131000
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz",
+        "speed": 1799,
+        "user": 5998000,
+        "nice": 3700,
+        "sys": 1599700,
+        "idle": 64491700,
+        "irq": 4433700
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz",
+        "speed": 1800,
+        "user": 5768800,
+        "nice": 2900,
+        "sys": 1633600,
+        "idle": 68908900,
+        "irq": 128600
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz",
+        "speed": 1800,
+        "user": 5644700,
+        "nice": 6400,
+        "sys": 1835000,
+        "idle": 68638500,
+        "irq": 270900
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz",
+        "speed": 1800,
+        "user": 5889000,
+        "nice": 11400,
+        "sys": 1619400,
+        "idle": 68813500,
+        "irq": 135000
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "wlp2s0",
+        "internal": false,
+        "mac": "64:32:a8:9e:cb:90",
+        "address": "192.168.101.14",
+        "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "lo",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "wlp2s0",
+        "internal": false,
+        "mac": "64:32:a8:9e:cb:90",
+        "address": "fe80::ed7d:19bf:a19b:4f70",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 2
+      }
+    ],
+    "host": "gustavo-81s9"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x0000000000b05e75",
+      "symbol": "report::TriggerNodeReport(v8::Isolate*, node::Environment*, char const*, char const*, std::string const&, v8::Local<v8::String>) [/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node]"
+    },
+    {
+      "pc": "0x00000000009dbda3",
+      "symbol": "node::OnFatalError(char const*, char const*) [/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000b3b45e",
+      "symbol": "v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000b3b7d9",
+      "symbol": "v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000ce6b75",
+      "symbol": " [/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000ce7206",
+      "symbol": "v8::internal::Heap::RecomputeLimits(v8::internal::GarbageCollector) [/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000cf309a",
+      "symbol": "v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags) [/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000cf3fa5",
+      "symbol": "v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000cf69b8",
+      "symbol": "v8::internal::Heap::AllocateRawWithRetryOrFail(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000cbd2e7",
+      "symbol": "v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationType) [/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000000ff334b",
+      "symbol": "v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*) [/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node]"
+    },
+    {
+      "pc": "0x0000000001376519",
+      "symbol": " [/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node]"
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2197737472,
+    "totalCommittedMemory": 2024880336,
+    "usedMemory": 1999527096,
+    "availableMemory": 144811984,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 32568,
+        "capacity": 261872,
+        "used": 32296,
+        "available": 229576
+      },
+      "new_space": {
+        "memorySize": 33554432,
+        "committedMemory": 30735160,
+        "capacity": 16759808,
+        "used": 10248488,
+        "available": 6511320
+      },
+      "old_space": {
+        "memorySize": 2157817856,
+        "committedMemory": 1988123008,
+        "capacity": 2104947520,
+        "used": 1983714064,
+        "available": 121233456
+      },
+      "code_space": {
+        "memorySize": 425984,
+        "committedMemory": 347808,
+        "capacity": 311808,
+        "used": 311808,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 1314816,
+        "committedMemory": 1279552,
+        "capacity": 913840,
+        "used": 913840,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 4313088,
+        "committedMemory": 4313088,
+        "capacity": 4303048,
+        "used": 4303048,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 3552,
+        "used": 3552,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 16759808,
+        "used": 0,
+        "available": 16759808
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 20.3896,
+    "kernelCpuSeconds": 1.65001,
+    "cpuConsumptionPercent": 146.931,
+    "maxRss": 2112884736,
+    "pageFaults": {
+      "IORequired": 1,
+      "IONotRequired": 537506
+    },
+    "fsActivity": {
+      "reads": 25024,
+      "writes": 16
+    }
+  },
+  "uvthreadResourceUsage": {
+    "userCpuSeconds": 11.5357,
+    "kernelCpuSeconds": 0.692032,
+    "cpuConsumptionPercent": 81.5184,
+    "fsActivity": {
+      "reads": 24848,
+      "writes": 16
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "SHELL": "/usr/bin/zsh",
+    "npm_command": "exec",
+    "LSCOLORS": "Gxfxcxdxbxegedabagacad",
+    "SESSION_MANAGER": "local/gustavo-81s9:@/tmp/.ICE-unix/1278,unix/gustavo-81s9:/tmp/.ICE-unix/1278",
+    "npm_config_userconfig": "/home/gustavomov/.npmrc",
+    "COLORTERM": "truecolor",
+    "XDG_CONFIG_DIRS": "/etc/xdg",
+    "npm_config_cache": "/home/gustavomov/.npm",
+    "LESS": "-R",
+    "XDG_SESSION_PATH": "/org/freedesktop/DisplayManager/Session0",
+    "NVM_INC": "/home/gustavomov/.nvm/versions/node/v12.15.0/include/node",
+    "XDG_MENU_PREFIX": "xfce-",
+    "TERM_PROGRAM_VERSION": "1.55.2",
+    "APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL": "true",
+    "NODE": "/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node",
+    "npm_config_package": "@babel/core\n\n@babel/node",
+    "LC_ADDRESS": "pt_BR.UTF-8",
+    "LC_NAME": "pt_BR.UTF-8",
+    "SSH_AUTH_SOCK": "/tmp/ssh-foZBJ1SYL3yL/agent.1329",
+    "COLOR": "1",
+    "DESKTOP_SESSION": "xfce",
+    "LC_MONETARY": "pt_BR.UTF-8",
+    "SSH_AGENT_PID": "1330",
+    "BAMF_DESKTOP_FILE_HINT": "/var/lib/snapd/desktop/applications/code_code.desktop",
+    "NO_AT_BRIDGE": "1",
+    "npm_config_globalconfig": "/home/gustavomov/.nvm/versions/node/v12.15.0/etc/npmrc",
+    "EDITOR": "/usr/bin/nano",
+    "GTK_MODULES": "canberra-gtk-module:canberra-gtk-module",
+    "XDG_SEAT": "seat0",
+    "PWD": "/home/gustavomov/Documentos/Graph-Project",
+    "GSETTINGS_SCHEMA_DIR": "/snap/code/62/usr/share/glib-2.0/schemas",
+    "LOGNAME": "gustavomov",
+    "XDG_SESSION_DESKTOP": "xfce",
+    "QT_QPA_PLATFORMTHEME": "qt5ct",
+    "XDG_SESSION_TYPE": "x11",
+    "PANEL_GDK_CORE_DEVICE_EVENTS": "0",
+    "npm_config_init_module": "/home/gustavomov/.npm-init.js",
+    "_": "/home/gustavomov/Documentos/Graph-Project/node_modules/.bin/babel-node",
+    "XAUTHORITY": "/home/gustavomov/.Xauthority",
+    "VSCODE_GIT_ASKPASS_NODE": "/var/lib/snapd/snap/code/62/usr/share/code/code",
+    "XDG_GREETER_DATA_DIR": "/var/lib/lightdm-data/gustavomov",
+    "MOTD_SHOWN": "pam",
+    "GDM_LANG": "pt_BR.utf8",
+    "GTK2_RC_FILES": "/home/gustavomov/.gtkrc-2.0",
+    "HOME": "/home/gustavomov",
+    "LANG": "pt_BR.utf8",
+    "LC_PAPER": "pt_BR.UTF-8",
+    "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:",
+    "XDG_CURRENT_DESKTOP": "XFCE",
+    "npm_package_version": "0.0.1",
+    "DISABLE_WAYLAND": "1",
+    "GIT_ASKPASS": "/var/lib/snapd/snap/code/62/usr/share/code/resources/app/extensions/git/dist/askpass.sh",
+    "XDG_SEAT_PATH": "/org/freedesktop/DisplayManager/Seat0",
+    "INIT_CWD": "/home/gustavomov/Documentos/Graph-Project",
+    "CHROME_DESKTOP": "code-url-handler.desktop",
+    "npm_lifecycle_script": "babel-node \"--presets\" \"@babel/preset-env\" \"./src/scripts/main.js\"",
+    "NVM_DIR": "/home/gustavomov/.nvm",
+    "XDG_SESSION_CLASS": "user",
+    "TERM": "xterm-256color",
+    "LC_IDENTIFICATION": "pt_BR.UTF-8",
+    "npm_package_name": "graph-project",
+    "ZSH": "/home/gustavomov/.oh-my-zsh",
+    "npm_config_prefix": "/home/gustavomov/.nvm/versions/node/v12.15.0",
+    "USER": "gustavomov",
+    "VSCODE_GIT_IPC_HANDLE": "/run/user/1000/vscode-git-b435fa1159.sock",
+    "DISPLAY": ":0.0",
+    "npm_lifecycle_event": "npx",
+    "SHLVL": "2",
+    "NVM_CD_FLAGS": "-q",
+    "PAGER": "less",
+    "LC_TELEPHONE": "pt_BR.UTF-8",
+    "LC_MEASUREMENT": "pt_BR.UTF-8",
+    "XDG_VTNR": "7",
+    "XDG_SESSION_ID": "2",
+    "npm_execpath": "/home/gustavomov/.nvm/versions/node/v12.15.0/lib/node_modules/npm/bin/npx-cli.js",
+    "XDG_RUNTIME_DIR": "/run/user/1000",
+    "npm_package_json": "/home/gustavomov/Documentos/Graph-Project/package.json",
+    "LC_TIME": "pt_BR.UTF-8",
+    "VSCODE_GIT_ASKPASS_MAIN": "/var/lib/snapd/snap/code/62/usr/share/code/resources/app/extensions/git/dist/askpass-main.js",
+    "QT_AUTO_SCREEN_SCALE_FACTOR": "0",
+    "GTK3_MODULES": "xapp-gtk3-module:xapp-gtk3-module",
+    "XDG_DATA_DIRS": "/home/gustavomov/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop:/usr/share",
+    "npm_config_noproxy": "",
+    "PATH": "/home/gustavomov/Documentos/Graph-Project/node_modules/.bin:/home/gustavomov/Documentos/node_modules/.bin:/home/gustavomov/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/home/gustavomov/.nvm/versions/node/v12.15.0/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/home/gustavomov/.nvm/versions/node/v12.15.0/bin:/home/gustavomov/.local/bin:/home/gustavomov/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/var/lib/snapd/snap/bin:/usr/lib/jvm/default/bin",
+    "npm_config_metrics_registry": "https://registry.npmjs.org/",
+    "npm_config_node_gyp": "/home/gustavomov/.nvm/versions/node/v12.15.0/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js",
+    "GDMSESSION": "xfce",
+    "ORIGINAL_XDG_CURRENT_DESKTOP": "XFCE",
+    "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
+    "NVM_BIN": "/home/gustavomov/.nvm/versions/node/v12.15.0/bin",
+    "MAIL": "/var/spool/mail/gustavomov",
+    "npm_node_execpath": "/home/gustavomov/.nvm/versions/node/v12.15.0/bin/node",
+    "LC_NUMERIC": "pt_BR.UTF-8",
+    "OLDPWD": "/home/gustavomov/Documentos/Graph-Project",
+    "TERM_PROGRAM": "vscode"
+  },
+  "userLimits": {
+    "core_file_size_blocks": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "data_seg_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "file_size_blocks": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_locked_memory_bytes": {
+      "soft": 65536,
+      "hard": 65536
+    },
+    "max_memory_size_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "open_files": {
+      "soft": 524288,
+      "hard": 524288
+    },
+    "stack_size_bytes": {
+      "soft": 8388608,
+      "hard": "unlimited"
+    },
+    "cpu_time_seconds": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    },
+    "max_user_processes": {
+      "soft": 31292,
+      "hard": 31292
+    },
+    "virtual_memory_kbytes": {
+      "soft": "unlimited",
+      "hard": "unlimited"
+    }
+  },
+  "sharedObjects": [
+    "linux-vdso.so.1",
+    "/usr/lib/libdl.so.2",
+    "/usr/lib/libstdc++.so.6",
+    "/usr/lib/libm.so.6",
+    "/usr/lib/libgcc_s.so.1",
+    "/usr/lib/libpthread.so.0",
+    "/usr/lib/libc.so.6",
+    "/lib64/ld-linux-x86-64.so.2"
+  ]
+}
