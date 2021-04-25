@@ -5,6 +5,12 @@
 */
 export function catchEdges(Buffer) {
   const bufferAsString = Buffer.toString();
-  const [, ...nestedEdges] = bufferAsString.split('\n');
-  return nestedEdges.map((edge) => edge.split(' ').map((node) => parseInt(node, 10)));
+  const [qtdNodes, ...nestedEdges] = bufferAsString.split('\n');
+
+  const edges = nestedEdges.map((edge) => edge.split(' ').map((node) => parseInt(node, 10)));
+
+  return {
+    edges: edges.filter(([node1, node2]) => Number.isInteger(node1) && Number.isInteger(node2)),
+    qtdNodes,
+  };
 }
