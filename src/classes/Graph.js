@@ -1,6 +1,8 @@
 import fs from 'fs';
 import * as GraphAsAdjacentVector from '../functions/adjacentVector';
+// eslint-disable-next-line import/no-cycle
 import * as GraphAsAdjacentMatrix from '../functions/adjacentMatrix';
+
 import {
   catchEdges,
   getDegrees,
@@ -23,10 +25,16 @@ export class Graph {
     if (!filePath && !buffer && !size) throw new Error('Missing filePath or buffer or size.');
     const Buffer = filePath ? fs.readFileSync(filePath) : buffer;
 
-    this.edges = Buffer ? catchEdges(Buffer) : [];
+    const {
+      edges,
+      qtdNodes,
+    } = Buffer ? catchEdges(Buffer) : { edges: [], qtdNodes: size };
+
+    this.edges = edges;
+    this.nodes = qtdNodes;
     this.saveFunctions(memoryStructure);
 
-    this.GraphStructure = this.createGraph(this.edges, size);
+    this.GraphStructure = this.createGraph(this.edges, qtdNodes);
     this.saveDegreesInfos();
   }
 
@@ -59,20 +67,19 @@ export class Graph {
     this.highestDegree = highestDegree;
     this.medianDegree = medianDegree;
     this.averageDegree = averageDegree;
-    this.nodes = this.GraphStructure.length - 1;
   }
 
   saveGraphInfosFile(path = './src/testFiles/testAnswerFiles/graphInfos.txt') {
     this.checkIfShouldRegenerate();
     this.connectedComponents();
     let fileAsString = '';
-    fileAsString += `\nNº Nodes = ${this.GraphStructure.length - 1}`;
+    fileAsString += `\nNº Nodes = ${this.nodes}`;
     fileAsString += `\nNº Edges = ${this.edges.length}`;
     fileAsString += `\nLowest Degree = ${this.lowestDegree}`;
     fileAsString += `\nHighest Degree = ${this.highestDegree}`;
     fileAsString += `\nMedian Degree = ${this.medianDegree}`;
     fileAsString += `\nAverage Degree = ${this.averageDegree}`;
-    fileAsString += `\nDiameter = ${this.calculateDiameter()}\n`;
+    fileAsString += `\nDiameter = ${this.diameter || 'not calculated'}`;
     fileAsString += this.componentsInfo;
 
     fs.writeFileSync(path, fileAsString);
@@ -116,14 +123,13 @@ export class Graph {
 
   addEdge(sourceNode, targetNode) {
     if (!sourceNode || !targetNode) throw new Error('Missing sourceNode e/or targetNode');
-
     this.edges.push([sourceNode, targetNode]);
     this.shouldRegenerate = true;
   }
 
   checkIfShouldRegenerate() {
     if (this.shouldRegenerate) {
-      this.GraphStructure = this.createGraph(this.edges);
+      this.GraphStructure = this.createGraph(this.edges, this.nodes);
       this.saveDegreesInfos();
     }
     this.shouldRegenerate = false;
