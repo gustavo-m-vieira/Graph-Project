@@ -147,26 +147,32 @@ export class Graph {
   connectedComponents(func = this.bfs) {
     this.checkIfShouldRegenerate();
     this.components = components(this.GraphStructure, func);
+
     [this.biggestComponent] = this.components;
     [this.smallestComponent] = this.components.slice(-1);
     this.numberOfComponents = this.components.length;
-    let tabs = '\t';
-    let ComponentsAsStrings = `${tabs}Connected Components Info:`;
-    tabs += tabs;
-    ComponentsAsStrings += `\n${tabs}Number of components: ${this.numberOfComponents}`;
+
+    let ComponentsAsStrings = 'Connected Components Info:';
+
+    ComponentsAsStrings += `\n\tNumber of components: ${this.numberOfComponents}`;
     for (let component = 0; component < this.numberOfComponents; component += 1) {
-      ComponentsAsStrings += `\n${tabs}Component: ${component + 1}`;
-      ComponentsAsStrings += `\n${tabs}\tSize: ${this.components[component].size}`;
-      ComponentsAsStrings += `\n${tabs}\tNodes: ${this.components[component].nodes}\n`;
+      ComponentsAsStrings += `\n\tComponent: ${component + 1}`;
+      ComponentsAsStrings += `\n\t\tEdges: ${this.components[component].edges.length}`;
+      ComponentsAsStrings += `\n\t\tNodes: ${this.components[component].nodes}\n`;
     }
     ComponentsAsStrings += '\n-------------------------';
-    ComponentsAsStrings += `\n${tabs}Biggest Component Size: ${this.biggestComponent.size}`;
-    ComponentsAsStrings += `\n${tabs}Biggest Component Nodes: ${this.biggestComponent.nodes}\n`;
-    ComponentsAsStrings += `\n${tabs}Smallest Component Size: ${this.smallestComponent.size}`;
-    ComponentsAsStrings += `\n${tabs}Smallest Component Nodes: ${this.smallestComponent.nodes}`;
+    ComponentsAsStrings += `\n\tBiggest Component Edges: ${this.biggestComponent.edges.length}`;
+    ComponentsAsStrings += `\n\tBiggest Component Nodes: ${this.biggestComponent.nodes}\n`;
+    ComponentsAsStrings += `\n\tSmallest Component Edges: ${this.smallestComponent.edges.length}`;
+    ComponentsAsStrings += `\n\tSmallest Component Nodes: ${this.smallestComponent.nodes}`;
 
     this.componentsInfo = ComponentsAsStrings;
 
     return this.componentsInfo;
+  }
+
+  getNodesWithEdges() {
+    this.checkIfShouldRegenerate();
+    return this.countNodesWithEdges(this.GraphStructure);
   }
 }

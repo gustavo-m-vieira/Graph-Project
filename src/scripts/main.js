@@ -12,17 +12,19 @@ const { path = './src/testFiles/testInputFiles/grafo_3.txt' } = minimist(process
 */
 async function main() {
   try {
-    const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
+    const graph = new Graph({ memoryStructure: 'adjacent matrix', filePath: path });
 
     console.log({ graph });
 
+    console.log({ x: graph.getNodesWithEdges() });
+
     graph.saveGraphInfosFile();
 
-    // console.log({
-    //   bfs: graph.runBFS(2),
-    //   dfs: graph.runDFS(2),
-    //   minimumPath: graph.findMinimumPath(4440, 40),
-    // });
+    console.log({
+      bfs: graph.runBFS(2),
+      dfs: graph.runDFS(2),
+      minimumPath: graph.findMinimumPath(4440, 40),
+    });
   } catch (error) {
     console.log('Something went wrong', { error });
   }

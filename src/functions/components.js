@@ -2,13 +2,13 @@
  *
  * @name components
  * @param {Array()} graph
- * @param {Function()} func
+ * @param {Function()} func - usually a bfs
  * @returns {Object[]} connectedComponents
  */
 
 export function components(graph, func) {
   const visitedNodes = new Set();
-  const connectedComponents = [];
+  let connectedComponents = [];
 
   const addVisitedNodes = (arrayofVisited) => arrayofVisited.forEach((visited) => {
     visitedNodes.add(visited);
@@ -21,6 +21,11 @@ export function components(graph, func) {
       addVisitedNodes(visited);
     }
   }
+
+  connectedComponents = connectedComponents.map((tree) => {
+    tree.nodes = tree.getNodesWithEdges();
+    return tree;
+  });
   return connectedComponents.sort(({ nodes: nodesA }, { nodes: nodesB }) => {
     if (nodesA < nodesB) return 1;
     if (nodesA > nodesB) return -1;
