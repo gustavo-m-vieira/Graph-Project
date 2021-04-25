@@ -7,15 +7,19 @@
  */
 
 export function components(graph, func) {
-  const nodes = new Set();
+  const visitedNodes = new Set();
   const connectedComponents = [];
-  for (let i = 1; i < graph.length; i += 1) nodes.add(i);
 
-  const checker = (arrayofVisited) => arrayofVisited.forEach((visited) => nodes.remove(visited));
-  for (const node of nodes) {
-    const { visited, inducedTree } = func(node);
-    connectedComponents.push(inducedTree);
-    checker(visited);
+  const addVisitedNodes = (arrayofVisited) => arrayofVisited.forEach((visited) => {
+    visitedNodes.add(visited);
+  });
+
+  for (let node = 1; node < graph.length; node += 1) {
+    if (!visitedNodes.has(node)) {
+      const { visited, inducedTree } = func({ sourceNode: node, graph, shouldGenerateInducedTree: true });
+      connectedComponents.push(inducedTree);
+      addVisitedNodes(visited);
+    }
   }
   return connectedComponents.sort(({ nodes: nodesA }, { nodes: nodesB }) => {
     if (nodesA < nodesB) return 1;

@@ -18,11 +18,11 @@ async function main() {
 
     graph.saveGraphInfosFile();
 
-    console.log({
-      bfs: graph.runBFS(2),
-      dfs: graph.runDFS(2),
-      minimumPath: graph.findMinimumPath(2, 3),
-    });
+    // console.log({
+    //   bfs: graph.runBFS(2),
+    //   dfs: graph.runDFS(2),
+    //   minimumPath: graph.findMinimumPath(4440, 40),
+    // });
   } catch (error) {
     console.log('Something went wrong', { error });
   }

@@ -1,4 +1,6 @@
 import { calculateMinimumPath } from '../calculateMinimumPath';
+// eslint-disable-next-line import/no-cycle
+import { Graph } from '../../classes';
 
 /**
 * @name bfs
@@ -6,7 +8,12 @@ import { calculateMinimumPath } from '../calculateMinimumPath';
 * @param {Number} s - start vertice
 * @param {Set[]} graph - Graph
 */
-export function bfs(sourceNode, graph, targetNode) {
+export function bfs({
+  sourceNode, graph, targetNode, shouldGenerateInducedTree = false,
+}) {
+  // console.log({ graph, sourceNode, targetNode });
+
+  const inducedTree = shouldGenerateInducedTree ? new Graph({ size: graph.length, memoryStructure: 'adjacent vector' }) : undefined;
   const visited = new Array(graph.length);
 
   let queue = [sourceNode];
@@ -29,6 +36,7 @@ export function bfs(sourceNode, graph, targetNode) {
         visited[node] = true;
         fathers[node] = s;
         levels[node] = levels[s] + 1;
+        if (shouldGenerateInducedTree) inducedTree.addEdge(s, node);
         if (targetNode && node === targetNode) {
           foundNode = true;
           break;
@@ -38,8 +46,15 @@ export function bfs(sourceNode, graph, targetNode) {
 
     if (targetNode && foundNode) break;
   }
-
+  console.log({ levels });
   if (targetNode && foundNode) ({ minimumPath, minimumPathSize } = calculateMinimumPath(targetNode, sourceNode, fathers));
+
+  if (shouldGenerateInducedTree) inducedTree.checkIfShouldRegenerate();
+
+  const visitedNodes = [];
+  for (let node = 1; node < graph.length; node += 1) {
+    if (visited[node]) visitedNodes.push(node);
+  }
 
   return {
     minimumPath,
@@ -47,5 +62,7 @@ export function bfs(sourceNode, graph, targetNode) {
     fathers,
     minimumPathSize,
     levels,
+    inducedTree,
+    visited: visitedNodes,
   };
 }
