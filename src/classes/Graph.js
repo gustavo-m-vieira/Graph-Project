@@ -78,8 +78,8 @@ export class Graph {
     fileAsString += `\nNº Edges = ${this.edges.length}`;
     fileAsString += `\nLowest Degree = ${this.lowestDegree}`;
     fileAsString += `\nHighest Degree = ${this.highestDegree}`;
-    fileAsString += `\nMedian Degree = ${this.medianDegree}`;
-    fileAsString += `\nAverage Degree = ${this.averageDegree}`;
+    fileAsString += `\nMedian Degree = ${this.medianDegree.toFixed(2)}`;
+    fileAsString += `\nAverage Degree = ${this.averageDegree.toFixed(2)}`;
     fileAsString += `\nDiameter = ${this.diameter || 'not calculated'}`;
     fileAsString += this.componentsInfo ? `\n${this.componentsInfo}` : '';
 
