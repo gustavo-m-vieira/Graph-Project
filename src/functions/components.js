@@ -23,7 +23,14 @@ export function components(graph, func) {
   }
 
   connectedComponents = connectedComponents.map((tree) => {
-    tree.nodes = tree.getNodesWithEdges();
+    const {
+      count,
+      nodesWithEdges,
+    } = tree.getNodesWithEdges();
+
+    tree.size = count;
+    tree.nodes = nodesWithEdges;
+
     return tree;
   });
   return connectedComponents.sort(({ nodes: nodesA }, { nodes: nodesB }) => {
