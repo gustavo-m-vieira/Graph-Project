@@ -26,3 +26,7 @@ Thumbs.db
 
 # Serverless directories
 .serverless
+
+#test file 
+
+src/scripts/main.js
