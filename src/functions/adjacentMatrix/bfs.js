@@ -11,7 +11,7 @@ import { calculateMinimumPath } from '../calculateMinimumPath';
 export function bfs({
   sourceNode, graph, targetNode, shouldGenerateInducedTree = false,
 }) {
-  const inducedTree = shouldGenerateInducedTree ? new Graph({ size: graph.length, memoryStructure: 'adjacent matrix' }) : undefined;
+  const inducedTree = shouldGenerateInducedTree ? new Graph({ size: graph.length, memoryStructure: 'adjacent matrix', startNode: sourceNode }) : undefined;
   const size = graph.length;
   const visited = new Array(size);
   const fathers = new Array(size);
