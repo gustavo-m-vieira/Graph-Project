@@ -1,10 +1,10 @@
 
 Nº Nodes = 6
-Nº Edges = 6
+Nº Edges = 5
 Lowest Degree = 1
-Highest Degree = 5
+Highest Degree = 4
 Median Degree = 1.00
-Average Degree = 2.00
+Average Degree = 1.67
 Diameter = not calculated
 Connected Components Info:
 	Number of components: 2
