@@ -46,7 +46,7 @@ export function bfs({
 
     if (targetNode && foundNode) break;
   }
-  console.log({ levels });
+  // console.log({ levels });
   if (targetNode && foundNode) ({ minimumPath, minimumPathSize } = calculateMinimumPath(targetNode, sourceNode, fathers));
 
   if (shouldGenerateInducedTree) inducedTree.checkIfShouldRegenerate();
