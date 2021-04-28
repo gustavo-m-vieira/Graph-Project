@@ -25,7 +25,7 @@ export class Graph {
   }) {
     if (!filePath && !buffer && !size) throw new Error('Missing filePath or buffer or size.');
     const Buffer = filePath ? fs.readFileSync(filePath) : buffer;
-
+    this.filePath = filePath;
     const {
       edges,
       qtdNodes,
@@ -36,6 +36,7 @@ export class Graph {
     this.saveFunctions(memoryStructure);
 
     this.GraphStructure = this.createGraph(this.edges, qtdNodes);
+
     this.saveDegreesInfos();
   }
 
@@ -72,7 +73,9 @@ export class Graph {
     this.nodes = Object.keys(degrees).map((a) => Number(a));
   }
 
-  saveGraphInfosFile(path = './src/testFiles/testAnswerFiles/graphInfos.txt') {
+  saveGraphInfosFile(path = './src/testFiles/testAnswerFiles/') {
+    let nameOfFileToSave = 'graphInfos';
+    nameOfFileToSave = this.filePath ? `${nameOfFileToSave}_${this.filePath.split('/').pop()}` : `${nameOfFileToSave}.txt`;
     this.checkIfShouldRegenerate();
     this.connectedComponents();
     let fileAsString = '';
@@ -85,7 +88,7 @@ export class Graph {
     fileAsString += `\nDiameter = ${this.diameter || 'not calculated'}`;
     fileAsString += this.componentsInfo ? `\n${this.componentsInfo}` : '';
 
-    fs.writeFileSync(path, fileAsString);
+    fs.writeFileSync(path + nameOfFileToSave, fileAsString);
   }
 
   runBFS(sourceNode, shouldGenerateInducedTree = false) {
