@@ -18,6 +18,8 @@ import {
 * @param {'adjacent vector' , 'adjacent matrix'} memoryStructure - if should represents as an array or a matrix
 * @param {String} [filePath] - path to the file
 * @param {Buffer} [Buffer] - Buffer of informations
+* @param {Number} [size] - graph's size
+* @param {Number} [startNode] - a node there is the first added to the graph
 */
 export class Graph {
   constructor({

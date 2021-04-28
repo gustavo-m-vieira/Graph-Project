@@ -1,6 +1,6 @@
 /**
 * @name catchEdges
-* @description Receives a Buffer and returns an array with edges.
+* @description Receives a Buffer and returns an array with edges and its length.
 * @param {Buffer} Buffer - a Buffer
 */
 export function catchEdges(Buffer) {
