@@ -25,17 +25,18 @@ export class Graph {
   }) {
     if (!filePath && !buffer && !size) throw new Error('Missing filePath or buffer or size.');
     const Buffer = filePath ? fs.readFileSync(filePath) : buffer;
-
+    this.filePath = filePath;
     const {
       edges,
       qtdNodes,
     } = Buffer ? catchEdges(Buffer) : { edges: [], qtdNodes: size };
 
     this.edges = edges;
-    this.nodes = qtdNodes;
+    this.size = qtdNodes;
     this.saveFunctions(memoryStructure);
 
     this.GraphStructure = this.createGraph(this.edges, qtdNodes);
+
     this.saveDegreesInfos();
   }
 
@@ -69,16 +70,16 @@ export class Graph {
     this.highestDegree = highestDegree;
     this.medianDegree = medianDegree;
     this.averageDegree = averageDegree;
-    this.degrees = degrees;
-    this.nodes = [];
-    for (let index = 0; index < this.size; index += 1) this.nodes.push(index);
+    this.nodes = Object.keys(degrees).map((a) => Number(a));
   }
 
-  saveGraphInfosFile(path = './src/testFiles/testAnswerFiles/graphInfos.txt') {
+  saveGraphInfosFile(path = './src/testFiles/testAnswerFiles/') {
+    let nameOfFileToSave = 'graphInfos';
+    nameOfFileToSave = this.filePath ? `${nameOfFileToSave}_${this.filePath.split('/').pop()}` : `${nameOfFileToSave}.txt`;
     this.checkIfShouldRegenerate();
     this.connectedComponents();
     let fileAsString = '';
-    fileAsString += `\nNº Nodes = ${this.nodes}`;
+    fileAsString += `\nNº Nodes = ${this.size}`;
     fileAsString += `\nNº Edges = ${this.edges.length}`;
     fileAsString += `\nLowest Degree = ${this.lowestDegree}`;
     fileAsString += `\nHighest Degree = ${this.highestDegree}`;
@@ -88,7 +89,7 @@ export class Graph {
     fileAsString += `\nDiameter = ${this.diameter || 'not calculated'}`;
     fileAsString += this.componentsInfo ? `\n${this.componentsInfo}` : '';
 
-    fs.writeFileSync(path, fileAsString);
+    fs.writeFileSync(path + nameOfFileToSave, fileAsString);
   }
 
   runBFS(sourceNode, shouldGenerateInducedTree = false) {
@@ -135,7 +136,7 @@ export class Graph {
 
   checkIfShouldRegenerate() {
     if (this.shouldRegenerate) {
-      this.GraphStructure = this.createGraph(this.edges, this.nodes);
+      this.GraphStructure = this.createGraph(this.edges, this.size);
       this.saveDegreesInfos();
     }
     this.shouldRegenerate = false;
@@ -162,13 +163,13 @@ export class Graph {
     ComponentsAsStrings += `\n\tNumber of components: ${this.numberOfComponents}`;
     for (let component = 0; component < this.numberOfComponents; component += 1) {
       ComponentsAsStrings += `\n\tComponent: ${component + 1}`;
-      ComponentsAsStrings += `\n\t\tEdges: ${this.components[component].edges.length}`;
+      ComponentsAsStrings += `\n\t\tSize: ${this.components[component].size}`;
       ComponentsAsStrings += `\n\t\tNodes: ${this.components[component].nodes}\n`;
     }
     ComponentsAsStrings += '\n-------------------------';
-    ComponentsAsStrings += `\n\tBiggest Component Edges: ${this.biggestComponent.edges.length}`;
+    ComponentsAsStrings += `\n\tBiggest Component Size: ${this.biggestComponent.size}`;
     ComponentsAsStrings += `\n\tBiggest Component Nodes: ${this.biggestComponent.nodes}\n`;
-    ComponentsAsStrings += `\n\tSmallest Component Edges: ${this.smallestComponent.edges.length}`;
+    ComponentsAsStrings += `\n\tSmallest Component Size: ${this.smallestComponent.size}`;
     ComponentsAsStrings += `\n\tSmallest Component Nodes: ${this.smallestComponent.nodes}`;
 
     this.componentsInfo = ComponentsAsStrings;
