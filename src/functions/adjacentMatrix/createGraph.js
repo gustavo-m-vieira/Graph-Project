@@ -22,11 +22,9 @@ function createEmptyMatrix(size = 0) {
 * @param {Number} qtdNodes - amount of nodes
 */
 export function createGraph(edges, qtdNodes) {
-  // console.log({ edges, qtdNodes });
   const graph = createEmptyMatrix(qtdNodes);
 
   for (const [node1, node2] of edges) {
-    // console.log({ node1, node2 });
     graph[node1][node2] = 1;
     graph[node2][node1] = 1;
   }

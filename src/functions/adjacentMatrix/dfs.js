@@ -4,8 +4,9 @@ import { Graph } from '../../classes';
 /**
 * @name dfs
 * @description Runs Depth First Search on a graph.
-* @param {Number} s - start vertice
+* @param {Number} sourceNode - start vertice
 * @param {Set[]} graph - Graph
+* @param {boolean} shouldGenerateInducedTree - If true, bfs will generate an induced tree
 */
 export function dfs({ sourceNode, graph, shouldGenerateInducedTree = false }) {
   const visited = new Set();

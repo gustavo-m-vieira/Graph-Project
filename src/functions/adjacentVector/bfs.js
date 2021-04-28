@@ -5,8 +5,10 @@ import { Graph } from '../../classes';
 /**
 * @name bfs
 * @description Runs Breadth First Search on a graph.
-* @param {Number} s - start vertice
+* @param {Number} sourceNode - start vertice
 * @param {Set[]} graph - Graph
+* @param {Number} [targetNode] - Final vertice
+* @param {boolean} shouldGenerateInducedTree - If true, bfs will generate an induced tree
 */
 export function bfs({
   sourceNode, graph, targetNode, shouldGenerateInducedTree = false,
