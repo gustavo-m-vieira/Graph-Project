@@ -4,10 +4,13 @@
 * @param {Number[][]} graph - matrix
 */
 export function countNodesWithEdges(graph) {
-  let count = 0;
-  graph.forEach((nodeArray) => {
-    if (nodeArray.find((node) => node === 1)) count += 1;
-  });
+  const nodeWithEdges = [];
+  for (let index = 0; index < graph.length; index += 1) {
+    if (graph[index].find((node) => node === 1)) nodeWithEdges.push(index);
+  }
 
-  return count;
+  return {
+    count: nodeWithEdges.length,
+    nodeWithEdges,
+  };
 }

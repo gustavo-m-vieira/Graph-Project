@@ -62,12 +62,16 @@ export class Graph {
       highestDegree,
       medianDegree,
       averageDegree,
+      degrees,
     } = getDegrees(this.edges);
 
     this.lowestDegree = lowestDegree;
     this.highestDegree = highestDegree;
     this.medianDegree = medianDegree;
     this.averageDegree = averageDegree;
+    this.degrees = degrees;
+    this.nodes = [];
+    for (let index = 0; index < this.size; index += 1) this.nodes.push(index);
   }
 
   saveGraphInfosFile(path = './src/testFiles/testAnswerFiles/graphInfos.txt') {
@@ -78,8 +82,9 @@ export class Graph {
     fileAsString += `\nNº Edges = ${this.edges.length}`;
     fileAsString += `\nLowest Degree = ${this.lowestDegree}`;
     fileAsString += `\nHighest Degree = ${this.highestDegree}`;
-    fileAsString += `\nMedian Degree = ${this.medianDegree}`;
-    fileAsString += `\nAverage Degree = ${this.averageDegree}`;
+    fileAsString += `\nMedian Degree = ${this.medianDegree.toFixed(2)}`;
+    fileAsString += `\nAverage Degree = ${this.averageDegree.toFixed(2)}`;
+    fileAsString += `\nDegrees = ${this.degrees}`;
     fileAsString += `\nDiameter = ${this.diameter || 'not calculated'}`;
     fileAsString += this.componentsInfo ? `\n${this.componentsInfo}` : '';
 
