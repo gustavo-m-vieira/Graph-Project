@@ -32,7 +32,7 @@ export class Graph {
     } = Buffer ? catchEdges(Buffer) : { edges: [], qtdNodes: size };
 
     this.edges = edges;
-    this.nodes = qtdNodes;
+    this.size = qtdNodes;
     this.saveFunctions(memoryStructure);
 
     this.GraphStructure = this.createGraph(this.edges, qtdNodes);
@@ -62,19 +62,21 @@ export class Graph {
       highestDegree,
       medianDegree,
       averageDegree,
+      degrees,
     } = getDegrees(this.edges);
 
     this.lowestDegree = lowestDegree;
     this.highestDegree = highestDegree;
     this.medianDegree = medianDegree;
     this.averageDegree = averageDegree;
+    this.nodes = Object.keys(degrees).map((a) => Number(a));
   }
 
   saveGraphInfosFile(path = './src/testFiles/testAnswerFiles/graphInfos.txt') {
     this.checkIfShouldRegenerate();
     this.connectedComponents();
     let fileAsString = '';
-    fileAsString += `\nNº Nodes = ${this.nodes}`;
+    fileAsString += `\nNº Nodes = ${this.size}`;
     fileAsString += `\nNº Edges = ${this.edges.length}`;
     fileAsString += `\nLowest Degree = ${this.lowestDegree}`;
     fileAsString += `\nHighest Degree = ${this.highestDegree}`;
@@ -130,7 +132,7 @@ export class Graph {
 
   checkIfShouldRegenerate() {
     if (this.shouldRegenerate) {
-      this.GraphStructure = this.createGraph(this.edges, this.nodes);
+      this.GraphStructure = this.createGraph(this.edges, this.size);
       this.saveDegreesInfos();
     }
     this.shouldRegenerate = false;
@@ -157,13 +159,13 @@ export class Graph {
     ComponentsAsStrings += `\n\tNumber of components: ${this.numberOfComponents}`;
     for (let component = 0; component < this.numberOfComponents; component += 1) {
       ComponentsAsStrings += `\n\tComponent: ${component + 1}`;
-      ComponentsAsStrings += `\n\t\tEdges: ${this.components[component].edges.length}`;
+      ComponentsAsStrings += `\n\t\tSize: ${this.components[component].size}`;
       ComponentsAsStrings += `\n\t\tNodes: ${this.components[component].nodes}\n`;
     }
     ComponentsAsStrings += '\n-------------------------';
-    ComponentsAsStrings += `\n\tBiggest Component Edges: ${this.biggestComponent.edges.length}`;
+    ComponentsAsStrings += `\n\tBiggest Component Size: ${this.biggestComponent.size}`;
     ComponentsAsStrings += `\n\tBiggest Component Nodes: ${this.biggestComponent.nodes}\n`;
-    ComponentsAsStrings += `\n\tSmallest Component Edges: ${this.smallestComponent.edges.length}`;
+    ComponentsAsStrings += `\n\tSmallest Component Size: ${this.smallestComponent.size}`;
     ComponentsAsStrings += `\n\tSmallest Component Nodes: ${this.smallestComponent.nodes}`;
 
     this.componentsInfo = ComponentsAsStrings;

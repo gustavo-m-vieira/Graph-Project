@@ -30,5 +30,6 @@ export function getDegrees(edges) {
     highestDegree,
     medianDegree: medianDegree || undefined,
     averageDegree: averageDegree || undefined,
+    degrees,
   };
 }
