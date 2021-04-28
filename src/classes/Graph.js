@@ -21,8 +21,10 @@ import {
 */
 export class Graph {
   constructor({
-    memoryStructure, filePath, buffer, size,
+    memoryStructure, filePath, buffer, size, startNode,
   }) {
+    this.startNode = startNode;
+
     if (!filePath && !buffer && !size) throw new Error('Missing filePath or buffer or size.');
     const Buffer = filePath ? fs.readFileSync(filePath) : buffer;
     this.filePath = filePath;
@@ -33,6 +35,8 @@ export class Graph {
 
     this.edges = edges;
     this.size = qtdNodes;
+    this.nodes = [];
+    for (let index = 0; index < this.size; index += 1) this.nodes.push(index);
     this.saveFunctions(memoryStructure);
 
     this.GraphStructure = this.createGraph(this.edges, qtdNodes);
@@ -70,7 +74,7 @@ export class Graph {
     this.highestDegree = highestDegree;
     this.medianDegree = medianDegree;
     this.averageDegree = averageDegree;
-    this.nodes = Object.keys(degrees).map((a) => Number(a));
+    this.degrees = degrees;
   }
 
   saveGraphInfosFile(path = './src/testFiles/testAnswerFiles/') {
@@ -85,7 +89,6 @@ export class Graph {
     fileAsString += `\nHighest Degree = ${this.highestDegree}`;
     fileAsString += `\nMedian Degree = ${this.medianDegree.toFixed(2)}`;
     fileAsString += `\nAverage Degree = ${this.averageDegree.toFixed(2)}`;
-    fileAsString += `\nDegrees = ${this.degrees}`;
     fileAsString += `\nDiameter = ${this.diameter || 'not calculated'}`;
     fileAsString += this.componentsInfo ? `\n${this.componentsInfo}` : '';
 
@@ -177,8 +180,10 @@ export class Graph {
     return this.componentsInfo;
   }
 
-  getNodesWithEdges() {
-    this.checkIfShouldRegenerate();
-    return this.countNodesWithEdges(this.GraphStructure);
+  removeNodesWithNoEdges() {
+    this.saveDegreesInfos();
+    this.nodes = Object.keys(this.degrees).map((a) => Number(a));
+    if (this.nodes.length === 0) this.nodes = [this.startNode];
+    this.size = this.nodes.length;
   }
 }

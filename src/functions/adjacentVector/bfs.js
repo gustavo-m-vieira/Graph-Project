@@ -11,9 +11,7 @@ import { Graph } from '../../classes';
 export function bfs({
   sourceNode, graph, targetNode, shouldGenerateInducedTree = false,
 }) {
-  // console.log({ graph, sourceNode, targetNode });
-
-  const inducedTree = shouldGenerateInducedTree ? new Graph({ size: graph.length, memoryStructure: 'adjacent vector' }) : undefined;
+  const inducedTree = shouldGenerateInducedTree ? new Graph({ size: graph.length, memoryStructure: 'adjacent vector', startNode: sourceNode }) : undefined;
   const visited = new Array(graph.length);
 
   let queue = [sourceNode];

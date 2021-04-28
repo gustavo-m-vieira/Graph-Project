@@ -23,17 +23,10 @@ export function components(graph, func) {
   }
 
   connectedComponents = connectedComponents.map((tree) => {
-    const {
-      count,
-      nodesWithEdges,
-    } = tree.getNodesWithEdges();
-
-    tree.size = count;
-    tree.nodes = nodesWithEdges;
-
+    tree.removeNodesWithNoEdges();
     return tree;
   });
-  return connectedComponents.sort(({ nodes: nodesA }, { nodes: nodesB }) => {
+  return connectedComponents.sort(({ size: nodesA }, { size: nodesB }) => {
     if (nodesA < nodesB) return 1;
     if (nodesA > nodesB) return -1;
     return 0;
