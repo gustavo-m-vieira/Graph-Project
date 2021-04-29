@@ -14,7 +14,7 @@ async function main() {
   try {
     const graph = new Graph({ memoryStructure: 'adjacent matrix', filePath: path });
 
-    // console.log({ graph });
+    console.log({ graph });
 
     graph.saveGraphInfosFile();
   } catch (error) {
