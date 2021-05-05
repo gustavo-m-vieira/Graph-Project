@@ -83,7 +83,7 @@ export class Graph {
     let nameOfFileToSave = 'graphInfos';
     nameOfFileToSave = this.filePath ? `${nameOfFileToSave}_${this.filePath.split('/').pop()}` : `${nameOfFileToSave}.txt`;
     this.checkIfShouldRegenerate();
-    this.connectedComponents();
+    // this.connectedComponents();
     let fileAsString = '';
     fileAsString += `\nNº Nodes = ${this.size}`;
     fileAsString += `\nNº Edges = ${this.edges.length}`;
