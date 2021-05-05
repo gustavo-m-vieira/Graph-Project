@@ -12,8 +12,7 @@ export function getDegrees(edges) {
     degrees[node2] = (degrees[node2] || 0) + 1;
   }
 
-  const sortedDegreesArray = Object.values(degrees).sort();
-
+  const sortedDegreesArray = Object.values(degrees).sort((a, b) => a - b);
   const [lowestDegree] = sortedDegreesArray;
   const [highestDegree] = sortedDegreesArray.slice(-1);
   const averageDegree = sortedDegreesArray.reduce((a, b) => a + b, 0) / sortedDegreesArray.length;

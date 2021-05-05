@@ -3,7 +3,7 @@ import util from 'util';
 import { Graph } from '../classes';
 
 util.inspect.defaultOptions.depth = null;
-const { path = './src/testFiles/testInputFiles/grafo_3.txt' } = minimist(process.argv.slice(2));
+const { path = './src/testFiles/testInput/grafo_5.txt' } = minimist(process.argv.slice(2));
 
 /**
 * @name Main
@@ -12,10 +12,8 @@ const { path = './src/testFiles/testInputFiles/grafo_3.txt' } = minimist(process
 */
 async function main() {
   try {
-    const graph = new Graph({ memoryStructure: 'adjacent matrix', filePath: path });
-
-    console.log({ graph });
-
+    const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
+    // console.log(graph);
     graph.saveGraphInfosFile();
   } catch (error) {
     console.log('Something went wrong', { error });
