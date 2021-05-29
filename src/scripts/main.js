@@ -14,7 +14,9 @@ async function main() {
   try {
     const graph = new Graph({ memoryStructure: 'adjacent matrix', filePath: path });
     // console.log(graph);
-    graph.saveGraphInfosFile();
+    graph.calculateDiameter();
+    // graph.saveGraphInfosFile();
+    // console.log(graph.runDFS(4));
   } catch (error) {
     console.log('Something went wrong', { error });
   }
