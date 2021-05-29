@@ -5,7 +5,7 @@ Lowest Degree = 5
 Highest Degree = 16
 Median Degree = 11.00
 Average Degree = 11.38
-Diameter = not calculated
+Diameter = 4
 Connected Components Info:
 	Number of components: 1
 	Component: 1

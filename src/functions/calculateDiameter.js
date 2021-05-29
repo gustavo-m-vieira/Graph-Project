@@ -2,12 +2,14 @@
 * @name calculateDiameter
 * @description Calculate the diameter of the graph.
 * @param {func} func - bfs function
-* @param {Set[]} graph - Graph
+* @param {Class} graph - Graph
 */
 export function calculateDiameter(graph, func) {
+  const { GraphStructure } = graph;
   const biggestLevels = [];
-  for (let node = 1; node < graph.length; node += 1) {
+  for (let node = 1; node < GraphStructure.length; node += 1) {
     let { levels } = func({ sourceNode: node, graph });
+    console.log({ node, levels });
     levels = levels.filter((level) => level);
     biggestLevels.push(Math.max.apply(null, levels));
   }
