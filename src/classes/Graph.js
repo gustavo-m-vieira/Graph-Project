@@ -1,14 +1,14 @@
 import fs from 'fs';
-// eslint-disable-next-line import/no-cycle
-import * as GraphAsAdjacentVector from '../functions/adjacentVector';
-// eslint-disable-next-line import/no-cycle
-import * as GraphAsAdjacentMatrix from '../functions/adjacentMatrix';
 
+// eslint-disable-next-line import/no-cycle
 import {
   catchEdges,
   getDegrees,
   calculateDiameter,
   components,
+  createGraph,
+  dfs,
+  bfs,
 } from '../functions';
 
 /**
@@ -26,6 +26,7 @@ export class Graph {
     memoryStructure, filePath, buffer, size, startNode,
   }) {
     this.startNode = startNode;
+    this.memoryStructure = memoryStructure;
 
     if (!filePath && !buffer && !size) throw new Error('Missing filePath or buffer or size.');
     const Buffer = filePath ? fs.readFileSync(filePath) : buffer;
@@ -39,28 +40,10 @@ export class Graph {
     this.size = qtdNodes;
     this.nodes = [];
     for (let index = 0; index < this.size; index += 1) this.nodes.push(index);
-    this.saveFunctions(memoryStructure);
 
-    this.GraphStructure = this.createGraph(this.edges, qtdNodes);
+    this.GraphStructure = createGraph(edges, qtdNodes, memoryStructure);
 
     this.saveDegreesInfos();
-  }
-
-  saveFunctions(memoryStructure) {
-    let functions;
-
-    switch (memoryStructure) {
-      case 'adjacent vector':
-        functions = GraphAsAdjacentVector;
-        break;
-      case 'adjacent matrix':
-        functions = GraphAsAdjacentMatrix;
-        break;
-      default:
-        throw Error('memoryStructure should be one of this options: "adjacent vector" or "adjacent matrix".');
-    }
-
-    Object.entries(functions).forEach(([key, value]) => { this[key] = value; });
   }
 
   saveDegreesInfos() {
@@ -103,7 +86,7 @@ export class Graph {
     if (!sourceNode) throw new Error('Missing sourceNode');
     if (sourceNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
 
-    return this.bfs({ sourceNode, graph: this.GraphStructure, shouldGenerateInducedTree });
+    return bfs({ sourceNode, graph: this, shouldGenerateInducedTree });
   }
 
   runDFS(sourceNode, shouldGenerateInducedTree = false) {
@@ -112,7 +95,7 @@ export class Graph {
     if (!sourceNode) throw new Error('Missing sourceNode');
     if (sourceNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
 
-    return this.dfs({ sourceNode, graph: this.GraphStructure, shouldGenerateInducedTree });
+    return dfs({ sourceNode, graph: this, shouldGenerateInducedTree });
   }
 
   findMinimumPath(sourceNode, targetNode) {
@@ -125,7 +108,7 @@ export class Graph {
     const {
       minimumPath,
       minimumPathSize,
-    } = this.bfs({ sourceNode, graph: this.GraphStructure, targetNode });
+    } = bfs({ sourceNode, graph: this, targetNode });
 
     return {
       minimumPath,
@@ -134,6 +117,7 @@ export class Graph {
   }
 
   addEdge(sourceNode, targetNode) {
+    console.log({ sourceNode, targetNode });
     if (!sourceNode || !targetNode) throw new Error('Missing sourceNode e/or targetNode');
     this.edges.push([sourceNode, targetNode]);
     this.shouldRegenerate = true;
@@ -141,7 +125,7 @@ export class Graph {
 
   checkIfShouldRegenerate() {
     if (this.shouldRegenerate) {
-      this.GraphStructure = this.createGraph(this.edges, this.size);
+      this.GraphStructure = createGraph(this.edges, this.size, this.memoryStructure);
       this.saveDegreesInfos();
     }
     this.shouldRegenerate = false;
@@ -150,14 +134,14 @@ export class Graph {
   calculateDiameter() {
     this.checkIfShouldRegenerate();
 
-    this.diameter = calculateDiameter(this.GraphStructure, this.bfs);
+    this.diameter = calculateDiameter(this, bfs);
 
     return this.diameter;
   }
 
-  connectedComponents(func = this.bfs) {
+  connectedComponents(func = bfs) {
     this.checkIfShouldRegenerate();
-    this.components = components(this.GraphStructure, func);
+    this.components = components(this, func);
 
     [this.biggestComponent] = this.components;
     [this.smallestComponent] = this.components.slice(-1);
