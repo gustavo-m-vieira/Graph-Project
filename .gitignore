@@ -2,6 +2,7 @@
 node_modules/
 dist/
 
+<<<<<<< HEAD
 # Log files
 *.log
 
@@ -29,3 +30,8 @@ Thumbs.db
 
 # Test files
 src/testFiles/testInput/
+=======
+
+# Test files
+src/testFiles/testInput/
+>>>>>>> main
