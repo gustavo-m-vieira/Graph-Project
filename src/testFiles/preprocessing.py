@@ -4,6 +4,7 @@ PathToProcess = './src/testFiles/testInput/'
 os.chdir(PathToProcess)
 
 def preprocess():
+    '''Function that removes repeated edges, as well as self loops. Intended to be use on small .txt files (<30Mb)'''
     for file in os.listdir():
         file_name,file_ext = os.path.splitext(file)
         with open(file,'r') as inputFile, open(f'{file_name}_proc{file_ext}','w') as output:
