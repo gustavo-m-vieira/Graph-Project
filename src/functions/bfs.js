@@ -13,7 +13,6 @@ import { Graph } from '../classes';
 export function bfs({
   sourceNode, graph, targetNode, shouldGenerateInducedTree = false,
 }) {
-  console.log({ graph });
   const { GraphStructure } = graph;
 
   const inducedTree = shouldGenerateInducedTree
@@ -33,19 +32,29 @@ export function bfs({
 
   while (queue.length) {
     ([currentNode, ...queue] = queue);
-    for (let nodePosition = 1; nodePosition <= GraphStructure[currentNode].length; nodePosition += 1) {
-      let node = GraphStructure[currentNode][nodePosition];
+
+    const vectorNodes = graph.memoryStructure === 'adjacent matrix' ? undefined : Object.keys(GraphStructure[currentNode]);
+    const length = graph.memoryStructure === 'adjacent matrix'
+      ? GraphStructure[currentNode].length : vectorNodes.length;
+
+    for (let nodePosition = 0; nodePosition < length; nodePosition += 1) {
+      let node;
+
       if (graph.memoryStructure === 'adjacent matrix') {
         // eslint-disable-next-line no-continue
-        if (!node) continue;
+        if (!GraphStructure[currentNode][nodePosition]) continue;
+
         node = nodePosition;
-      }
+      } else node = vectorNodes[nodePosition];
+
       if (node && !visited[node]) {
         queue.push(node);
         visited[node] = true;
         fathers[node] = currentNode;
         levels[node] = (levels[currentNode] || 0) + 1;
+
         if (shouldGenerateInducedTree) inducedTree.addEdge(currentNode, node);
+
         if (targetNode && node === targetNode) {
           foundNode = true;
           break;
@@ -55,7 +64,7 @@ export function bfs({
 
     if (targetNode && foundNode) break;
   }
-  // console.log({ levels });
+
   if (targetNode && foundNode) ({ minimumPath, minimumPathSize } = calculateMinimumPath(targetNode, sourceNode, fathers));
 
   if (shouldGenerateInducedTree) inducedTree.checkIfShouldRegenerate();
