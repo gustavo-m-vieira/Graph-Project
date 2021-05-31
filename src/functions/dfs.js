@@ -19,13 +19,21 @@ export function dfs({ sourceNode, graph, shouldGenerateInducedTree = false }) {
 
   const dfsAux = (v) => {
     visited.add(v);
-    for (let nodePosition = 1; nodePosition < GraphStructure[v].length; nodePosition += 1) {
-      let node = GraphStructure[v][nodePosition];
+
+    const vectorNodes = graph.memoryStructure === 'adjacent matrix' ? undefined : Object.keys(GraphStructure[v]);
+    const length = graph.memoryStructure === 'adjacent matrix'
+      ? GraphStructure[v].length : vectorNodes.length;
+
+    for (let nodePosition = 0; nodePosition < length; nodePosition += 1) {
+      let node;
+
       if (graph.memoryStructure === 'adjacent matrix') {
         // eslint-disable-next-line no-continue
-        if (!node) continue;
+        if (!GraphStructure[v][nodePosition]) continue;
+
         node = nodePosition;
-      }
+      } else node = vectorNodes[nodePosition];
+
       if (!visited.has(node)) {
         fathers[node] = v;
         levels[node] = levels[v] + 1;
