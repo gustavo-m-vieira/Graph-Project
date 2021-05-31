@@ -26,3 +26,6 @@ Thumbs.db
 
 # Serverless directories
 .serverless
+
+# Test files
+src/testFiles/testInput/
