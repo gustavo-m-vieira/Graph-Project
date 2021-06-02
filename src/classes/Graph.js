@@ -12,15 +12,15 @@ import {
 } from '../functions';
 
 /**
-* @name Graph
-* @description A class that represents a Graph.
-* @param {Object} event
-* @param {'adjacent vector' , 'adjacent matrix'} memoryStructure - if should represents as an array or a matrix
-* @param {String} [filePath] - path to the file
-* @param {Buffer} [Buffer] - Buffer of informations
-* @param {Number} [size] - graph's size
-* @param {Number} [startNode] - a node there is the first added to the graph
-*/
+ * @name Graph
+ * @description A class that represents a Graph.
+ * @param {Object} event
+ * @param {'adjacent vector' , 'adjacent matrix'} memoryStructure - if should represents as an array or a matrix
+ * @param {String} [filePath] - path to the file
+ * @param {Buffer} [Buffer] - Buffer of informations
+ * @param {Number} [size] - graph's size
+ * @param {Number} [startNode] - a node there is the first added to the graph
+ */
 export class Graph {
   constructor({
     memoryStructure, filePath, buffer, size, startNode,
@@ -31,10 +31,9 @@ export class Graph {
     if (!filePath && !buffer && !size) throw new Error('Missing filePath or buffer or size.');
     const Buffer = filePath ? fs.readFileSync(filePath) : buffer;
     this.filePath = filePath;
-    const {
-      edges,
-      qtdNodes,
-    } = Buffer ? catchEdges(Buffer) : { edges: [], qtdNodes: size };
+    const { edges, qtdNodes } = Buffer
+      ? catchEdges(Buffer)
+      : { edges: [], qtdNodes: size };
 
     this.edges = edges;
     this.size = qtdNodes;
@@ -64,7 +63,9 @@ export class Graph {
 
   saveGraphInfosFile(path = './src/testFiles/testAnswerFiles/') {
     let nameOfFileToSave = 'graphInfos';
-    nameOfFileToSave = this.filePath ? `${nameOfFileToSave}_${this.filePath.split('/').pop()}` : `${nameOfFileToSave}.txt`;
+    nameOfFileToSave = this.filePath
+      ? `${nameOfFileToSave}_${this.filePath.split('/').pop()}`
+      : `${nameOfFileToSave}.txt`;
     this.checkIfShouldRegenerate();
     this.connectedComponents();
     let fileAsString = '';
@@ -105,10 +106,11 @@ export class Graph {
     if (sourceNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
     if (targetNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
 
-    const {
-      minimumPath,
-      minimumPathSize,
-    } = bfs({ sourceNode, graph: this, targetNode });
+    const { minimumPath, minimumPathSize } = bfs({
+      sourceNode,
+      graph: this,
+      targetNode,
+    });
 
     return {
       minimumPath,
@@ -125,7 +127,11 @@ export class Graph {
 
   checkIfShouldRegenerate() {
     if (this.shouldRegenerate) {
-      this.GraphStructure = createGraph(this.edges, this.size, this.memoryStructure);
+      this.GraphStructure = createGraph(
+        this.edges,
+        this.size,
+        this.memoryStructure,
+      );
       this.saveDegreesInfos();
     }
     this.shouldRegenerate = false;
@@ -150,7 +156,11 @@ export class Graph {
     let ComponentsAsStrings = 'Connected Components Info:';
 
     ComponentsAsStrings += `\n\tNumber of components: ${this.numberOfComponents}`;
-    for (let component = 0; component < this.numberOfComponents; component += 1) {
+    for (
+      let component = 0;
+      component < this.numberOfComponents;
+      component += 1
+    ) {
       ComponentsAsStrings += `\n\tComponent: ${component + 1}`;
       ComponentsAsStrings += `\n\t\tSize: ${this.components[component].size}`;
       ComponentsAsStrings += `\n\t\tNodes: ${this.components[component].nodes}\n`;

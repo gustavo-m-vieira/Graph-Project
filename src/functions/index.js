@@ -7,3 +7,4 @@ export * from './components';
 export * from './bfs';
 export * from './dfs';
 export * from './createGraph';
+export * from './dijkstra';

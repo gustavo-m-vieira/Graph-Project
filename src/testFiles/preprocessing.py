@@ -19,8 +19,8 @@ def preprocess():
                 if edge not in NoRepeat:
                     NoRepeat.append(edge)
                     output.write(' '.join(edge)+' '+ weight)
- 
-
+                    
+        print(f'preprocessing of {file} is done')
 
 if __name__ == '__main__':
     preprocess()
