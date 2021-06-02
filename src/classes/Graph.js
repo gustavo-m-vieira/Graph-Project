@@ -31,11 +31,14 @@ export class Graph {
     if (!filePath && !buffer && !size) throw new Error('Missing filePath or buffer or size.');
     const Buffer = filePath ? fs.readFileSync(filePath) : buffer;
     this.filePath = filePath;
-    const { edges, qtdNodes } = Buffer
-      ? catchEdges(Buffer)
-      : { edges: [], qtdNodes: size };
+    const {
+      edges,
+      qtdNodes,
+      edgesWithNoWeight,
+    } = Buffer ? catchEdges(Buffer) : { edges: [], qtdNodes: size, edgesWithNoWeight: [] };
 
     this.edges = edges;
+    this.edgesWithNoWeight = edgesWithNoWeight;
     this.size = qtdNodes;
     this.nodes = [];
     for (let index = 0; index < this.size; index += 1) this.nodes.push(index);
@@ -118,10 +121,14 @@ export class Graph {
     };
   }
 
-  addEdge(sourceNode, targetNode) {
-    console.log({ sourceNode, targetNode });
+  addEdge(sourceNode, targetNode, weight = 1) {
     if (!sourceNode || !targetNode) throw new Error('Missing sourceNode e/or targetNode');
-    this.edges.push([sourceNode, targetNode]);
+    if (sourceNode > targetNode) ([sourceNode, targetNode] = [targetNode, sourceNode]);
+    if (!this.edgesWithNoWeight.includes(`${sourceNode} ${targetNode}`)) {
+      this.edgesWithNoWeight.push(`${sourceNode} ${targetNode}`);
+      this.edges.push([sourceNode, targetNode, weight]);
+    }
+
     this.shouldRegenerate = true;
   }
 

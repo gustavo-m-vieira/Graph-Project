@@ -24,13 +24,13 @@ function createEmptyMatrix(size = 0) {
 function createVectorGraph(edges, qtdNodes) {
   const graph = [];
   for (let index = 0; index <= qtdNodes; index += 1) {
-    graph[index] = [];
+    graph[index] = {};
   }
 
-  for (const [node1, node2] of edges) {
-    graph[node1].push(node2);
+  for (const [node1, node2, weight = 1] of edges) {
+    graph[node1][node2] = weight;
 
-    graph[node2].push(node1);
+    graph[node2][node1] = weight;
   }
 
   return graph;
@@ -45,9 +45,10 @@ function createVectorGraph(edges, qtdNodes) {
 function createMatrixGraph(edges, qtdNodes) {
   const graph = createEmptyMatrix(qtdNodes);
 
-  for (const [node1, node2] of edges) {
-    graph[node1][node2] = 1;
-    graph[node2][node1] = 1;
+  for (const [node1, node2, weight] of edges) {
+    const parsedWeight = weight || 1;
+    graph[node1][node2] = parsedWeight;
+    graph[node2][node1] = parsedWeight;
   }
 
   return graph;
