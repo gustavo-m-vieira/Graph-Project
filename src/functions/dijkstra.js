@@ -9,8 +9,9 @@ import heap from 'heap';
  */
 export function dijkstra(graph, startNode) {
   // Checking if there is a negative weight in the graph
-  graph.weights.forEach((weight) => {
-    if (Number(weight) < 0) {
+  graph.edges.forEach((edge) => {
+    // Edge[2] represents the weight of the edge
+    if (Number(edge[2]) < 0) {
       throw new Error('Dijkstra wont work properly on negative weights');
     }
   });
@@ -28,7 +29,7 @@ export function dijkstra(graph, startNode) {
   // For each node in the graph, start its distance to start node to infinity
   graph.nodes.forEach((node) => {
     const key = node.toString();
-    if (!(node === startNode)) {
+    if (node !== startNode) {
       dist[key] = Infinity;
       prev[key] = null;
     }
@@ -47,6 +48,6 @@ export function dijkstra(graph, startNode) {
       }
     });
   }
-  return dist;
+  return { dist, prev };
 }
 dijkstra([2, 3], 1);

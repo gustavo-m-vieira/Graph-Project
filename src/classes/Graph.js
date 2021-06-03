@@ -9,6 +9,7 @@ import {
   createGraph,
   dfs,
   bfs,
+  dijkstra,
 } from '../functions';
 
 /**
@@ -188,5 +189,27 @@ export class Graph {
     this.nodes = Object.keys(this.degrees).map((a) => Number(a));
     if (this.nodes.length === 0) this.nodes = [this.startNode];
     this.size = this.nodes.length;
+  }
+
+  dijkstraAlgorithm(startNode) {
+    this.checkIfShouldRegenerate();
+    const { dist, prev } = dijkstra(this, startNode);
+    this.dist = dist;
+    this.prev = prev;
+  }
+
+  getMinDistPath(startNode, targetNode) {
+    this.dijkstraAlgorithm(startNode);
+    const distanceToTarget = this.dist[targetNode.toString()];
+    const path = [targetNode.toString()];
+    let father = this.prev[targetNode.toString()];
+    while (startNode !== father) {
+      const fatherKey = father.toString();
+      path.push(fatherKey);
+      father = this.prev[fatherKey];
+    }
+    path.push(startNode.toString());
+    path.reverse();
+    return { distanceToTarget, path };
   }
 }
