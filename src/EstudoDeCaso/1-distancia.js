@@ -3,7 +3,7 @@ import util from 'util';
 import { Graph } from '../classes';
 
 util.inspect.defaultOptions.depth = null;
-const { path = './src/testFiles/testInput/grafo_W_5_proc.txt' } = minimist(process.argv.slice(2));
+const { path = './src/testFiles/testInput/grafo_W_3_proc.txt' } = minimist(process.argv.slice(2));
 
 /**
 * @name distance
@@ -11,6 +11,7 @@ const { path = './src/testFiles/testInput/grafo_W_5_proc.txt' } = minimist(proce
 * @command npx -p @babel/core -p @babel/node babel-node --presets @babel/preset-env ./src/EstudoDeCaso/1-distancia.js
 */
 const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
+console.log('Graph loaded!');
 graph.dijkstraAlgorithm(1);
 async function distance(targetNode) {
   try {
@@ -22,6 +23,7 @@ async function distance(targetNode) {
     console.log('Something went wrong', { error });
   }
 }
+
 const targetNodes = [10, 20, 30, 40, 50];
 for (const node of targetNodes) {
   console.log(`Target Node: ${node}\n`);
