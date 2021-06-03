@@ -39,21 +39,18 @@ export function dijkstra(graph, startNode) {
     }
     queue.push({ value: key, distance: dist[key] });
   });
-  const explored = [];
   while (!queue.isEmpty()) {
     const u = queue.pop().value;
     const uKey = u.toString();
-    explored.push(uKey);
     const neighbors = Object.keys(graph.getNodeNeighborhood(u));
     for (const neighbor of neighbors) {
       const neighborKey = neighbor.toString();
-      if (!explored.includes(neighborKey)) {
-        if (dist[neighborKey] > dist[uKey] + graph.getEdgeWeight(u, neighbor)) {
-          queue.remove({ value: neighbor, distance: dist[neighborKey] });
-          dist[neighborKey] = dist[uKey] + graph.getEdgeWeight(u, neighbor);
-          queue.add({ value: neighbor, distance: dist[neighborKey] });
-          prev[neighborKey] = u;
-        }
+
+      if (dist[neighborKey] > dist[uKey] + graph.getEdgeWeight(u, neighbor)) {
+        queue.remove({ value: neighbor, distance: dist[neighborKey] });
+        dist[neighborKey] = dist[uKey] + graph.getEdgeWeight(u, neighbor);
+        queue.add({ value: neighbor, distance: dist[neighborKey] });
+        prev[neighborKey] = u;
       }
     }
   }
