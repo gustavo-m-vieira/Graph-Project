@@ -5,7 +5,7 @@ import heap from 'heap';
  * @description run dijsktra algorithm on a non-negative weighted graph
  * @param {Class} graph - Graph
  * @param {Number} startNode
- * @returns {Object} dist - Key: value = node : Distance to node
+ * @returns {Object} dist - Key: value = node : Distance to node; prev - Key = node , Value = father of node
  */
 export function dijkstra(graph, startNode) {
   // Checking if there is a negative weight in the graph
@@ -15,11 +15,13 @@ export function dijkstra(graph, startNode) {
       throw new Error('Dijkstra wont work properly on negative weights');
     }
   });
+  // Creating custom comparator to be used in the heap structure
   const customComparator = ({ distance: a }, { distance: b }) => {
     if (a < b) return -1;
     if (a > b) return 1;
     return 0;
   };
+  // Starting heap, dist
   const queue = heap(customComparator);
 
   const dist = {};
