@@ -199,17 +199,32 @@ export class Graph {
   }
 
   getMinDistPath(startNode, targetNode) {
-    this.dijkstraAlgorithm(startNode);
+    this.checkIfShouldRegenerate();
+    if (typeof (this.dist) === 'undefined') this.dijkstraAlgorithm(startNode);
     const distanceToTarget = this.dist[targetNode.toString()];
-    const path = [targetNode.toString()];
+    const minimumPath = [targetNode.toString()];
     let father = this.prev[targetNode.toString()];
     while (startNode !== father) {
       const fatherKey = father.toString();
-      path.push(fatherKey);
+      minimumPath.push(fatherKey);
       father = this.prev[fatherKey];
     }
-    path.push(startNode.toString());
-    path.reverse();
-    return { distanceToTarget, path };
+    minimumPath.push(startNode.toString());
+    minimumPath.reverse();
+    return { distanceToTarget, minimumPath };
+  }
+
+  getExcentricity(node) {
+    this.checkIfShouldRegenerate();
+    const { dist } = dijkstra(this, node);
+    let mostDistantNode = node;
+    let excentricity = 0;
+    for (const [key, value] of Object.entries(dist)) {
+      if (value > excentricity) {
+        excentricity = value;
+        mostDistantNode = key;
+      }
+    }
+    return { excentricity, mostDistantNode };
   }
 }
