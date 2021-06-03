@@ -227,4 +227,19 @@ export class Graph {
     }
     return { excentricity, mostDistantNode };
   }
+
+  getEdgeWeight(u, v) {
+    return this.GraphStructure[u][v];
+  }
+
+  getNodeNeighborhood(u) {
+    if (this.memoryStructure === 'adjacent matrix') {
+      const nodes = {};
+      for (let nodePosition = 0; nodePosition < this.GraphStructure[u].length; nodePosition += 1) {
+        if (this.GraphStructure[u][nodePosition]) nodes[nodePosition] = this.GraphStructure[u][nodePosition];
+      }
+      return nodes;
+    }
+    return this.GraphStructure[u];
+  }
 }
