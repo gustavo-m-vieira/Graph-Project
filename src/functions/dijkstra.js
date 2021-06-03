@@ -50,4 +50,3 @@ export function dijkstra(graph, startNode) {
   }
   return { dist, prev };
 }
-dijkstra([2, 3], 1);
