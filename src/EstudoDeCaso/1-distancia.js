@@ -3,20 +3,20 @@ import util from 'util';
 import { Graph } from '../classes';
 
 util.inspect.defaultOptions.depth = null;
-const { path = './src/testFiles/testInput/grafo_W_1.txt' } = minimist(process.argv.slice(2));
+const { path = './src/testFiles/testInput/grafo_W_5_proc.txt' } = minimist(process.argv.slice(2));
 
 /**
 * @name distance
 * @description Function to be executed for study cases.
 * @command npx -p @babel/core -p @babel/node babel-node --presets @babel/preset-env ./src/EstudoDeCaso/1-distancia.js
 */
+const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
+graph.dijkstraAlgorithm(1);
 async function distance(targetNode) {
   try {
-    const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
     const { distanceToTarget, minimumPath } = graph.getMinDistPath(1, targetNode);
-    console.log('\t\tDistance:');
-    console.log(distanceToTarget);
-    console.log('\n\t\t\tMinimum Path:');
+    console.log(`Distance: ${distanceToTarget}`);
+    console.log('Minimum Path:');
     console.log(minimumPath);
   } catch (error) {
     console.log('Something went wrong', { error });

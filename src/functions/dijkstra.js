@@ -1,4 +1,4 @@
-import heap from 'heap';
+import Heap from 'heap-js';
 
 /**
  * @name dijkstra
@@ -22,7 +22,8 @@ export function dijkstra(graph, startNode) {
     return 0;
   };
   // Starting heap, dist
-  const queue = heap(customComparator);
+  const queue = new Heap(customComparator);
+  // console.log(queue);
 
   const dist = {};
   const prev = {};
@@ -30,25 +31,31 @@ export function dijkstra(graph, startNode) {
   dist[startNode.toString()] = 0;
   // For each node in the graph, start its distance to start node to infinity
   graph.nodes.forEach((node) => {
+    node += 1;
     const key = node.toString();
     if (node !== startNode) {
       dist[key] = Infinity;
       prev[key] = null;
     }
-    queue.push({ value: node, distance: dist[key] });
+    queue.push({ value: key, distance: dist[key] });
   });
-  while (!queue.empty()) {
+  const explored = [];
+  while (!queue.isEmpty()) {
     const u = queue.pop().value;
     const uKey = u.toString();
-    const neighbors = graph.neighbors(u);
-    neighbors.forEach((neighbor) => {
+    explored.push(uKey);
+    const neighbors = Object.keys(graph.getNodeNeighborhood(u));
+    for (const neighbor of neighbors) {
       const neighborKey = neighbor.toString();
-      if (dist[neighborKey] > dist[uKey] + graph.weight(u, neighbor)) {
-        dist[neighborKey] = dist[uKey] + graph.weight(u, neighbor);
-        prev[neighborKey] = u;
-        queue.updateitem({ value: neighbor, distance: dist[neighborKey] });
+      if (!explored.includes(neighborKey)) {
+        if (dist[neighborKey] > dist[uKey] + graph.getEdgeWeight(u, neighbor)) {
+          queue.remove({ value: neighbor, distance: dist[neighborKey] });
+          dist[neighborKey] = dist[uKey] + graph.getEdgeWeight(u, neighbor);
+          queue.add({ value: neighbor, distance: dist[neighborKey] });
+          prev[neighborKey] = u;
+        }
       }
-    });
+    }
   }
   return { dist, prev };
 }

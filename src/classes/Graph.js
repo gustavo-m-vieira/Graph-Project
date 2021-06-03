@@ -199,15 +199,17 @@ export class Graph {
   }
 
   getMinDistPath(startNode, targetNode) {
-    this.checkIfShouldRegenerate();
-    if (typeof (this.dist) === 'undefined') this.dijkstraAlgorithm(startNode);
-    const distanceToTarget = this.dist[targetNode.toString()];
-    const minimumPath = [targetNode.toString()];
-    let father = this.prev[targetNode.toString()];
-    while (startNode !== father) {
+    const targetKey = targetNode.toString();
+    const startKey = startNode.toString();
+    // 'Stringified' the nodes
+    const distanceToTarget = this.dist[targetKey];
+    const minimumPath = [targetKey];
+    const fathers = this.prev;
+    let father = fathers[targetKey];
+    while (startKey !== father) {
       const fatherKey = father.toString();
       minimumPath.push(fatherKey);
-      father = this.prev[fatherKey];
+      father = fathers[fatherKey];
     }
     minimumPath.push(startNode.toString());
     minimumPath.reverse();

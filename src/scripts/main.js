@@ -3,7 +3,7 @@ import util from 'util';
 import { Graph } from '../classes';
 
 util.inspect.defaultOptions.depth = null;
-const { path = './src/testFiles/testInput/grafo_W_1.txt' } = minimist(process.argv.slice(2));
+const { path = './src/testFiles/testInput/grafo_W_1_proc.txt' } = minimist(process.argv.slice(2));
 
 /**
 * @name Main
@@ -12,11 +12,15 @@ const { path = './src/testFiles/testInput/grafo_W_1.txt' } = minimist(process.ar
 */
 async function main() {
   try {
-    const graph = new Graph({ memoryStructure: 'adjacent matrix', filePath: path });
-    console.log(graph);
-    graph.calculateDiameter();
-    graph.saveGraphInfosFile();
-    console.log(graph.runDFS(4));
+    const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
+    graph.dijkstraAlgorithm(1);
+    console.log(graph.dist);
+    console.log(graph.prev);
+    // const graph = new Graph({ memoryStructure: 'adjacent matrix', filePath: path });
+    // console.log(graph);
+    // graph.calculateDiameter();
+    // graph.saveGraphInfosFile();
+    // console.log(graph.runDFS(4));
   } catch (error) {
     console.log('Something went wrong', { error });
   }
