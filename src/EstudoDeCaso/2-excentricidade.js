@@ -10,14 +10,13 @@ const { path = './src/testFiles/testInput/grafo_W_1.txt' } = minimist(process.ar
 * @description Study case for excentricity of nodes.
 * @command npx -p @babel/core -p @babel/node babel-node --presets @babel/preset-env ./src/EstudoDeCaso/2-excentricidade.js
 */
+const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
+console.log('Graph loaded!');
 async function excentricidade(node) {
   try {
-    const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
     const { excentricity, mostDistantNode } = graph.excentricity(node);
-    console.log('\t\tExcentricity:');
-    console.log(excentricity);
-    console.log('\n\t\t\tMost distant node:');
-    console.log(mostDistantNode);
+    console.log(`Excentricity: ${excentricity}`);
+    console.log(`Most distant node: ${mostDistantNode}`);
   } catch (error) {
     console.log('Something went wrong', { error });
   }

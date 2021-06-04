@@ -7,7 +7,6 @@ import Heap from 'heap-js';
  * @returns {Object} dist - Key: value = node : Distance to node; prev - Key = node , Value = father of node
  */
 export function dijkstra(graph, startNode) {
-  // Checking if there is a negative weight in the graph
   console.log('Checking for edges with negative weights...');
   graph.edges.forEach((edge) => {
     // Edge[2] represents the weight of the edge
@@ -27,10 +26,8 @@ export function dijkstra(graph, startNode) {
     if (a.value === b.value) return true;
     return false;
   };
-  // Starting heap, dist
+  // Starting heap, dist(distance) , prev(father of node), explored (whether the node has already been explored or not);
   const queue = new Heap(customComparator);
-  // console.log(queue);
-
   const dist = {};
   const prev = {};
   const explored = {};
@@ -57,8 +54,8 @@ export function dijkstra(graph, startNode) {
     for (const neighbor of neighbors) {
       const neighborKey = neighbor.toString();
       if (explored[neighborKey] === false) {
-        if (dist[neighborKey] > dist[uKey] + graph.getEdgeWeight(u, neighbor)) {
-          queue.remove({ value: neighborKey, distance: dist[neighborKey] }, objectComparator);
+        if (dist[neighborKey] > dist[uKey] + graph.getEdgeWeight(u, neighbor)) { // Condicao de dijkstra
+          queue.remove({ value: neighborKey, distance: dist[neighborKey] }, objectComparator); // Atualizacao do heap e do vetor dist
           dist[neighborKey] = dist[uKey] + graph.getEdgeWeight(u, neighbor);
           queue.add({ value: neighbor, distance: dist[neighborKey] });
           prev[neighborKey] = u;
