@@ -10,19 +10,20 @@ export function catchEdges(Buffer) {
   const edges = [];
   const edgesWithNoWeight = [];
   nestedEdges.forEach((edge) => {
-    let [node1, node2, weight = 1] = edge.split(' ');
-    if ((node1 > node2)) ([node1, node2] = [node2, node1]);
+    // eslint-disable-next-line prefer-const
+    let [node1, node2, weight] = edge.split(' ');
+    // if ((node1 > node2)) ([node1, node2] = [node2, node1]);
 
-    node1 = parseInt(node1, 10);
-    node2 = parseInt(node2, 10);
+    // node1 = parseInt(node1, 10);
+    // node2 = parseInt(node2, 10);
     weight = parseFloat(weight);
 
-    if (!edgesWithNoWeight.includes(`${node1} ${node2}`)) {
-      if (Number.isInteger(node1) && Number.isInteger(node2)) {
-        edgesWithNoWeight.push(`${node1} ${node2}`);
-        edges.push([node1, node2, weight]);
-      }
-    }
+    // if (!edgesWithNoWeight.includes(`${node1} ${node2}`)) {
+    // if (Number.isInteger(node1) && Number.isInteger(node2)) {
+    // edgesWithNoWeight.push(`${node1} ${node2}`);
+    edges.push([node1, node2, weight]);
+    // }
+    // }
   });
 
   return {

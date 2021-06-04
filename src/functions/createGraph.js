@@ -22,12 +22,16 @@ function createEmptyMatrix(size = 0) {
 * @param {Number} qtdNodes - amount of nodes
 */
 function createVectorGraph(edges, qtdNodes) {
-  const graph = [];
+  const graph = {};
   for (let index = 0; index <= qtdNodes; index += 1) {
-    graph[index] = {};
+    graph[index.toString()] = {};
+    // console.log(graph);
   }
 
-  for (const [node1, node2, weight = 1] of edges) {
+  for (const edge of edges) {
+    const [node1, node2, weight] = edge;
+    if (typeof node1 === 'undefined' || typeof node2 === 'undefined') console.log(edge);
+
     graph[node1][node2] = weight;
 
     graph[node2][node1] = weight;
@@ -46,7 +50,7 @@ function createMatrixGraph(edges, qtdNodes) {
   const graph = createEmptyMatrix(qtdNodes);
 
   for (const [node1, node2, weight] of edges) {
-    const parsedWeight = weight || 1;
+    const parsedWeight = weight;
     graph[node1][node2] = parsedWeight;
     graph[node2][node1] = parsedWeight;
   }
