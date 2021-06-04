@@ -4,6 +4,7 @@
 * @param {Buffer} Buffer - a Buffer
 */
 export function catchEdges(Buffer) {
+  let graphHasWeights = false;
   const bufferAsString = Buffer.toString();
   const [qtdNodes, ...nestedEdges] = bufferAsString.split('\n');
 
@@ -17,7 +18,7 @@ export function catchEdges(Buffer) {
     // node1 = parseInt(node1, 10);
     // node2 = parseInt(node2, 10);
     weight = parseFloat(weight);
-
+    if (weight !== 1.0) graphHasWeights = true;
     // if (!edgesWithNoWeight.includes(`${node1} ${node2}`)) {
     // if (Number.isInteger(node1) && Number.isInteger(node2)) {
     // edgesWithNoWeight.push(`${node1} ${node2}`);
@@ -30,5 +31,6 @@ export function catchEdges(Buffer) {
     edges,
     edgesWithNoWeight,
     qtdNodes,
+    graphHasWeights,
   };
 }

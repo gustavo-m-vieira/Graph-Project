@@ -4,7 +4,7 @@ import { performance } from 'perf_hooks';
 import { Graph } from '../classes';
 
 util.inspect.defaultOptions.depth = null;
-const { path = './src/testFiles/testInput/grafo_W_1.txt' } = minimist(process.argv.slice(2));
+const { path = './src/testFiles/testInput/grafo_W_2_proc.txt' } = minimist(process.argv.slice(2));
 
 /**
 * @name tempoExcentricidade

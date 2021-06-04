@@ -36,11 +36,13 @@ export class Graph {
       edges,
       qtdNodes,
       edgesWithNoWeight,
+      graphHasWeights,
     } = Buffer ? catchEdges(Buffer) : { edges: [], qtdNodes: size, edgesWithNoWeight: [] };
 
     this.edges = edges;
     this.edgesWithNoWeight = edgesWithNoWeight;
     this.size = qtdNodes;
+    this.graphHasWeights = graphHasWeights;
     this.nodes = [];
     for (let index = 0; index < this.size; index += 1) this.nodes.push(index);
 
@@ -199,6 +201,11 @@ export class Graph {
   }
 
   getMinDistPath(startNode, targetNode) {
+    if (!this.graphHasWeights) { // Se o grafo nao possuir pesos, a BFS eh utilizada.
+      const { minimumPath } = this.findMinimumPath(startNode, targetNode);
+      const distanceToTarget = minimumPath.length;
+      return { distanceToTarget, minimumPath };
+    }
     const targetKey = targetNode.toString();
     const startKey = startNode.toString();
     // 'Stringified' the nodes

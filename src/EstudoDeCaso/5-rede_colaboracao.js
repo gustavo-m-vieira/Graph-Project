@@ -8,7 +8,7 @@ const { path = './src/testFiles/testInput/colaboradores.txt' } = minimist(proces
 /**
 * @name distance
 * @description Function to be executed for study cases.
-* @command npx -p @babel/core -p @babel/node babel-node --presets @babel/preset-env ./src/EstudoDeCaso/1-distancia.js
+* @command npx -p @babel/core -p @babel/node babel-node --presets @babel/preset-env ./src/EstudoDeCaso/5-rede_colaboracao.js
 */
 const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
 console.log('Graph loaded!');

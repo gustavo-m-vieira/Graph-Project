@@ -3,7 +3,7 @@ import util from 'util';
 import { Graph } from '../classes';
 
 util.inspect.defaultOptions.depth = null;
-const { path = './src/testFiles/testInput/grafo_W_4_proc.txt' } = minimist(process.argv.slice(2));
+const { path = './src/testFiles/testInput/grafo_W_1_proc.txt' } = minimist(process.argv.slice(2));
 
 /**
 * @name distance
