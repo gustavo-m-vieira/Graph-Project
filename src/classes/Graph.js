@@ -46,7 +46,7 @@ export class Graph {
 
     this.GraphStructure = createGraph(edges, qtdNodes, memoryStructure);
 
-    this.saveDegreesInfos();
+    // this.saveDegreesInfos();
   }
 
   saveDegreesInfos() {
