@@ -30,7 +30,8 @@ function createVectorGraph(edges, qtdNodes) {
 
   for (const edge of edges) {
     const [node1, node2, weight] = edge;
-    if (typeof node1 === 'undefined' || typeof node2 === 'undefined') console.log(edge);
+    // eslint-disable-next-line no-continue
+    if (typeof node1 === 'undefined' || typeof node2 === 'undefined') continue;
 
     graph[node1][node2] = weight;
 
