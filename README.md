@@ -9,7 +9,7 @@
  
  The new functionality of our Graph class can be found from lines [210 and below](https://github.com/gustavo-m-vieira/Graph-Project/blob/3b6cbd6ece36245d7128d4dab87887b31cbbf06c/src/classes/Graph.js#L210)
  
- For instructions of how to use our library, [Go to the Bottom](#Botton)
+ For instructions on how to use our library, [Go to the Bottom](#Botton)
 ## VER 1.0
  Hello! This is our first practice project for the 'Graph Theory' course!
  
