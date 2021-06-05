@@ -75,8 +75,7 @@ export class Graph {
       ? `${nameOfFileToSave}_${this.filePath.split('/').pop()}`
       : `${nameOfFileToSave}.txt`;
 
-    prim(this, sourceNode, nameOfFileToSave);
-    return 'File Generated';
+    return prim(this, sourceNode, nameOfFileToSave);
   }
 
   saveDegreesInfos() {
