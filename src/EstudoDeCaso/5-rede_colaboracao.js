@@ -13,11 +13,14 @@ const { path = './src/testFiles/testInput/rede_colaboracao.txt' } = minimist(pro
 const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
 graph.giveNameToNodes('./src/testFiles/testInput/rede_colaboracao_vertices.txt');
 console.log('Graph loaded!');
-graph.dijkstraAlgorithm(2722); // Dijkstra
-async function distance(targetNode) {
+const dijkstraNodeValue = graph.nameToNode['Edsger W. Dijkstra'];
+graph.dijkstraAlgorithm(dijkstraNodeValue); // Dijkstra
+
+async function distance(startNode, targetNode) {
   try {
-    const { distanceToTarget, minimumPath } = graph.getMinDistPath(1, targetNode);
+    const { distanceToTarget, minimumPath } = graph.getMinDistPath(startNode, targetNode);
     console.log(`Distance: ${distanceToTarget}`);
+    minimumPath.map((node) => graph.nodeToName[node]);
     console.log('Minimum Path:');
     console.log(minimumPath);
   } catch (error) {
@@ -27,9 +30,8 @@ async function distance(targetNode) {
 
 // eslint-disable-next-line no-unused-vars
 const targetNodes = ['Alan M. Turing', 'J. B. Kruskal', 'Jon M. Kleinberg', 'Éva Tardos', 'Daniel R. Figueiredo'];
-const targetMappedNumbers = [11365, 471365, 5709, 11386, 343930];
-for (const node of targetMappedNumbers) {
+for (const node of targetNodes) {
   console.log(`Target Node: ${node}\n`);
-  distance(node);
+  distance(dijkstraNodeValue, graph.nodeToName[node]);
   console.log('----------------------------');
 }
