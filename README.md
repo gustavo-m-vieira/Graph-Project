@@ -5,7 +5,7 @@
  * __Dijkstra Algorithm__: We now support finding minimum path and distance between nodes. For non-weighted graphs, BFS is used. Check out the [dijkstra algorithm](https://github.com/gustavo-m-vieira/Graph-Project/blob/main/src/functions/dijkstra.js)
  * __Excentricity__: What is maximum distance between a node and every other in a graph? You can find it out, alongside which node is the most distant one, [here](https://github.com/gustavo-m-vieira/Graph-Project/blob/ef8a98fcee7499b882332cc836532019fbfa47f8/src/classes/Graph.js#L226)
  * __Minimum Spanning Tree__ : 
- * __Test Example - Collaboration Network!__: We've gathered a graph from Ratton's website that represents a collaboration net. [here](https://github.com/gustavo-m-vieira/Graph-Project/blob/main/src/EstudoDeCaso/5-rede_colaboracao.js) you can check for yourself our library working!
+ * __Test Example - Collaboration Network!__: We've gathered a graph from Ratton's website that represents a collaboration net. [here](https://github.com/gustavo-m-vieira/Graph-Project/blob/main/src/EstudoDeCaso/5-rede_colaboracao.js) you can check for yourself our library working! Although the collaboration net is old and doesn't represents the reality, it's pretty dense, requiring a lot of time to run through it.
  
  The new functionality of our Graph class can be found from lines [210 and below](https://github.com/gustavo-m-vieira/Graph-Project/blob/3b6cbd6ece36245d7128d4dab87887b31cbbf06c/src/classes/Graph.js#L210)
  
