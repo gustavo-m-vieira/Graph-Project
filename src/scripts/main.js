@@ -13,11 +13,12 @@ const { path = './src/testFiles/testInput/grafo_W_1_proc.txt' } = minimist(proce
 async function main() {
   try {
     const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
-    graph.giveNameToNodes();
-    graph.dijkstraAlgorithm(1);
-    console.log(graph.dist);
-    console.log(graph.prev);
-    // const graph = new Graph({ memoryStructure: 'adjacent matrix', filePath: path });
+
+    console.log(graph.generateMST(1));
+
+    // graph.dijkstraAlgorithm(1);
+    // console.log(graph.dist);
+    // console.log(graph.prev);
     // console.log(graph);
     // graph.calculateDiameter();
     // graph.saveGraphInfosFile();

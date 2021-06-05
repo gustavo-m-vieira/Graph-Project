@@ -1,10 +1,14 @@
-function getMinorCost(vertices, cost) {
+import fs from 'fs';
+
+const filePath = './src/testFiles/testAnswerFiles/mst.txt';
+
+function getMinorCost(visited, cost, nodes) {
   let minorCost = Infinity;
   let minorCostVertice = null;
-  for (const vertice in vertices.values()) {
-    if (cost[vertice] < minorCost) {
-      minorCost = cost[vertice];
-      minorCostVertice = vertice;
+  for (let node = 1; node <= nodes.length; node += 1) {
+    if (cost[node] < minorCost && !visited[node]) {
+      minorCost = cost[node];
+      minorCostVertice = node;
     }
   }
 
@@ -18,20 +22,41 @@ export function prim(graph, o) {
   } = graph;
 
   const cost = new Array(GraphStructure.length);
+  const parent = new Array(GraphStructure.length);
 
   for (const node of nodes) cost[node] = Infinity;
 
-  const vertices = new Set(nodes);
-  const s = new Set();
+  const visited = new Array(GraphStructure.length);
+  cost[o] = 0;
+  parent[o] = -1;
 
-  while (s.size !== nodes.length) {
-    const u = getMinorCost(vertices, cost);
-    s.add(u);
+  for (let index = 0; index < nodes.length; index += 1) {
+    const u = getMinorCost(visited, cost, nodes);
+    visited[u] = true;
 
-    const neighbors = graph.getNodeNeighborhood(u);
-
-    for (const node in neighbors) {
-      if (cost[node] > neighbors[node]) cost[node] = neighbors[node];
+    for (let node = 1; node <= nodes.length; node += 1) {
+      if (GraphStructure[u][node] && !visited[node] && cost[node] > graph.getEdgeWeight(u, node)) {
+        cost[node] = graph.getEdgeWeight(u, node);
+        parent[node] = u;
+      }
     }
   }
+
+  console.log({
+    visited,
+    cost,
+    parent,
+  });
+
+  let file = '';
+  let jumpLine = false;
+  for (let index = 1; index <= nodes.length; index += 1) {
+    // eslint-disable-next-line no-continue
+    if (parent[index] === -1) continue;
+    if (jumpLine) file += '\n';
+    file += `${parent[index]} ${index} ${graph.getEdgeWeight(index, parent[index])}`;
+    jumpLine = true;
+  }
+  console.log({ file });
+  fs.writeFileSync(filePath, file, {});
 }

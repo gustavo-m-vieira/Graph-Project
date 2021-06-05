@@ -11,6 +11,7 @@ import {
   bfs,
   dijkstra,
   nameNodes,
+  prim,
 } from '../functions';
 
 /**
@@ -63,6 +64,14 @@ export class Graph {
     this.nameToNode = nameToNode;
     this.nodeToName = nodeToName;
     this.needToParseNode = true;
+  }
+
+  generateMST(sourceNode) {
+    if (!sourceNode) throw new Error('Missing sourceNode');
+    if (sourceNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
+
+    prim(this, sourceNode);
+    return 'File Generated';
   }
 
   saveDegreesInfos() {

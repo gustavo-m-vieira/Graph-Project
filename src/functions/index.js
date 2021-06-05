@@ -9,3 +9,4 @@ export * from './dfs';
 export * from './createGraph';
 export * from './dijkstra';
 export * from './nameNodes';
+export * from './prim';
