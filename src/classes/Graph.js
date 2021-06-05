@@ -45,7 +45,7 @@ export class Graph {
     this.size = qtdNodes;
     this.graphHasWeights = graphHasWeights;
     this.nodes = [];
-    for (let index = 0; index < this.size; index += 1) this.nodes.push(index);
+    for (let index = 1; index <= this.size; index += 1) this.nodes.push(index);
 
     this.GraphStructure = createGraph(edges, qtdNodes, memoryStructure);
 

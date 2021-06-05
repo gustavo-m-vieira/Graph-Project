@@ -3,7 +3,7 @@ import util from 'util';
 import { Graph } from '../classes';
 
 util.inspect.defaultOptions.depth = null;
-const { path = './src/testFiles/testInput/colaboradores.txt' } = minimist(process.argv.slice(2));
+const { path = './src/testFiles/testInput/rede_colaboracao.txt' } = minimist(process.argv.slice(2));
 
 /**
 * @name distance
@@ -11,6 +11,7 @@ const { path = './src/testFiles/testInput/colaboradores.txt' } = minimist(proces
 * @command npx -p @babel/core -p @babel/node babel-node --presets @babel/preset-env ./src/EstudoDeCaso/5-rede_colaboracao.js
 */
 const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
+graph.giveNameToNodes('./src/testFiles/testInput/rede_colaboracao_vertices.txt');
 console.log('Graph loaded!');
 graph.dijkstraAlgorithm(2722); // Dijkstra
 async function distance(targetNode) {

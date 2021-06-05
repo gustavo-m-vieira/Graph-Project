@@ -36,7 +36,6 @@ export function dijkstra(graph, startNode) {
   // For each node in the graph, start its distance to start node to infinity
   console.log('Initializing values for each node!');
   graph.nodes.forEach((node) => {
-    node += 1;
     const key = node.toString();
     if (node !== startNode) {
       dist[key] = Infinity;

@@ -13,6 +13,7 @@ const { path = './src/testFiles/testInput/grafo_W_1_proc.txt' } = minimist(proce
 async function main() {
   try {
     const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
+    graph.giveNameToNodes();
     graph.dijkstraAlgorithm(1);
     console.log(graph.dist);
     console.log(graph.prev);
