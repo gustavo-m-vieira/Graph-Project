@@ -28,26 +28,10 @@ export function prim(graph, o) {
     const u = getMinorCost(vertices, cost);
     s.add(u);
 
-    const vectorNodes = graph.memoryStructure === 'adjacent matrix' ? undefined : Object.keys(GraphStructure[u]);
-    const length = graph.memoryStructure === 'adjacent matrix'
-      ? GraphStructure[u].length : vectorNodes.length;
+    const neighbors = graph.getNodeNeighborhood(u);
 
-    for (let nodePosition = 0; nodePosition < length; nodePosition += 1) {
-      let node;
-      let weight;
-
-      if (graph.memoryStructure === 'adjacent matrix') {
-        // eslint-disable-next-line no-continue
-        if (!GraphStructure[u][nodePosition]) continue;
-
-        node = nodePosition;
-        weight = GraphStructure[u][nodePosition];
-      } else {
-        node = vectorNodes[nodePosition];
-        weight = GraphStructure[u][node];
-      }
-
-      if (cost[node] > weight) cost[node] = weight;
+    for (const node in neighbors) {
+      if (cost[node] > neighbors[node]) cost[node] = neighbors[node];
     }
   }
 }

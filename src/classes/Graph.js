@@ -10,6 +10,7 @@ import {
   dfs,
   bfs,
   dijkstra,
+  nameNodes,
 } from '../functions';
 
 /**
@@ -49,6 +50,19 @@ export class Graph {
     this.GraphStructure = createGraph(edges, qtdNodes, memoryStructure);
 
     // this.saveDegreesInfos();
+  }
+
+  giveNameToNodes(filePath) {
+    const Buffer = fs.readFileSync(filePath);
+
+    const {
+      nameToNode,
+      nodeToName,
+    } = nameNodes(Buffer);
+
+    this.nameToNode = nameToNode;
+    this.nodeToName = nodeToName;
+    this.needToParseNode = true;
   }
 
   saveDegreesInfos() {
@@ -210,7 +224,7 @@ export class Graph {
     const startKey = startNode.toString();
     // 'Stringified' the nodes
     const distanceToTarget = this.dist[targetKey];
-    const minimumPath = [targetKey];
+    let minimumPath = [targetKey];
     const fathers = this.prev;
     let father = fathers[targetKey];
     while (startKey !== father) {
@@ -220,6 +234,7 @@ export class Graph {
     }
     minimumPath.push(startNode.toString());
     minimumPath.reverse();
+    if (this.needToParseNode) minimumPath = minimumPath.map((node) => this.nodeToName[node]);
     return { distanceToTarget, minimumPath };
   }
 
