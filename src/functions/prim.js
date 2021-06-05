@@ -49,14 +49,18 @@ export function prim(graph, o, fileName) {
   });
 
   let file = '';
+  let totalweight = 0;
   let jumpLine = false;
   for (let index = 1; index <= nodes.length; index += 1) {
     // eslint-disable-next-line no-continue
     if (parent[index] === -1) continue;
     if (jumpLine) file += '\n';
     file += `${parent[index]} ${index} ${graph.getEdgeWeight(index, parent[index])}`;
+    totalweight += graph.getEdgeWeight(index, parent[index]);
     jumpLine = true;
   }
   console.log({ file });
   fs.writeFileSync(filePath, file, {});
+
+  return totalweight;
 }

@@ -12,5 +12,6 @@ const { path = './src/testFiles/testInput/grafo_W_3_proc.txt' } = minimist(proce
 */
 const graph = new Graph({ memoryStructure: 'adjacent vector', filePath: path });
 console.log('Graph loaded!');
-graph.generateMST(1); // MST
+console.log({ weight: graph.generateMST(1) }); // MST
+
 // Now open the file in testFiles/testAnswerFiles
