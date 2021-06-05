@@ -37,20 +37,17 @@ export class Graph {
     const {
       edges,
       qtdNodes,
-      edgesWithNoWeight,
       graphHasWeights,
-    } = Buffer ? catchEdges(Buffer) : { edges: [], qtdNodes: size, edgesWithNoWeight: [] };
+    } = Buffer ? catchEdges(Buffer) : { edges: [], qtdNodes: size };
 
     this.edges = edges;
-    this.edgesWithNoWeight = edgesWithNoWeight;
     this.size = qtdNodes;
     this.graphHasWeights = graphHasWeights;
     this.nodes = [];
     for (let index = 1; index <= this.size; index += 1) this.nodes.push(index);
 
     this.GraphStructure = createGraph(edges, qtdNodes, memoryStructure);
-
-    // this.saveDegreesInfos();
+    if (!this.graphHasWeights) this.saveDegreesInfos();
   }
 
   saveDegreesInfos() {
@@ -129,10 +126,8 @@ export class Graph {
   addEdge(sourceNode, targetNode, weight = 1) {
     if (!sourceNode || !targetNode) throw new Error('Missing sourceNode e/or targetNode');
     if (sourceNode > targetNode) ([sourceNode, targetNode] = [targetNode, sourceNode]);
-    if (!this.edgesWithNoWeight.includes(`${sourceNode} ${targetNode}`)) {
-      this.edgesWithNoWeight.push(`${sourceNode} ${targetNode}`);
-      this.edges.push([sourceNode, targetNode, weight]);
-    }
+
+    this.edges.push([sourceNode, targetNode, weight]);
 
     this.shouldRegenerate = true;
   }

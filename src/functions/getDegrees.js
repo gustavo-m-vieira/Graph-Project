@@ -7,7 +7,8 @@
 export function getDegrees(edges) {
   const degrees = {};
 
-  for (const [node1, node2] of edges) {
+  // eslint-disable-next-line no-unused-vars
+  for (const [node1, node2, w] of edges) {
     degrees[node1] = (degrees[node1] || 0) + 1;
     degrees[node2] = (degrees[node2] || 0) + 1;
   }
