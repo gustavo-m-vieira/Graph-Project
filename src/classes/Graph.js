@@ -70,7 +70,12 @@ export class Graph {
     if (!sourceNode) throw new Error('Missing sourceNode');
     if (sourceNode > this.GraphStructure.length - 1) throw new Error('Node does not exists');
 
-    prim(this, sourceNode);
+    let nameOfFileToSave = 'mst';
+    nameOfFileToSave = this.filePath
+      ? `${nameOfFileToSave}_${this.filePath.split('/').pop()}`
+      : `${nameOfFileToSave}.txt`;
+
+    prim(this, sourceNode, nameOfFileToSave);
     return 'File Generated';
   }
 

@@ -1,7 +1,5 @@
 import fs from 'fs';
 
-const filePath = './src/testFiles/testAnswerFiles/mst.txt';
-
 function getMinorCost(visited, cost, nodes) {
   let minorCost = Infinity;
   let minorCostVertice = null;
@@ -15,7 +13,9 @@ function getMinorCost(visited, cost, nodes) {
   return minorCostVertice;
 }
 
-export function prim(graph, o) {
+export function prim(graph, o, fileName) {
+  const filePath = `./src/testFiles/testAnswerFiles/${fileName}`;
+
   const {
     GraphStructure,
     nodes,
