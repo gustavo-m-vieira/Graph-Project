@@ -11,7 +11,7 @@
  
  #### New functions:
  
- ##### Graph.dijkstraAlgorithm(startNode):
+ #### Graph.dijkstraAlgorithm(startNode):
           Sets the graph properties 'dist' and 'prev'
           Dist : distance from startNode to every other. Key: node; Value: distance from startNode to node.
           Prev : object of 'fathers'. Whenever a node 'u' is analyzed, all its neighbors that havent been discovered will have prev[neighbor] = u. Key: node; Value: Parent of node;
