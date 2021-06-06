@@ -18,9 +18,9 @@ graph.dijkstraAlgorithm(dijkstraNodeValue); // Dijkstra
 
 async function distance(startNode, targetNode) {
   try {
-    const { distanceToTarget, minimumPath } = graph.getMinDistPath(startNode, targetNode);
+    let { distanceToTarget, minimumPath } = graph.getMinDistPath(startNode, targetNode);
     console.log(`Distance: ${distanceToTarget}`);
-    minimumPath.map((node) => graph.nodeToName[node]);
+    minimumPath = minimumPath.map((node) => graph.nodeToName[node]);
     console.log('Minimum Path:');
     console.log(minimumPath);
   } catch (error) {
